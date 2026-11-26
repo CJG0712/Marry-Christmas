@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Merry Christmas · To PYQ</title>
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" media="print" onload="this.media='all'" />
+  <style>
+    :root {
+      --bg-void: #020510;
+      --ice-blue: #62e4ff;
+      --sapphire: #3688ff;
+      --rose-pink: #ff82c4;
+      --blush-pink: #ffcce7;
+      --pearl: #f6fbff;
+      --font-script: "Great Vibes", "Snell Roundhand", "Edwardian Script ITC", "Segoe Script", "Brush Script MT", cursive;
+      --font-serif-en: "Cormorant Garamond", "Didot", "Baskerville", "Georgia", serif;
+      --font-art-cn: "Ma Shan Zheng", "STXingkai", "Xingkai SC", "Kaiti SC", "STKaiti", "KaiTi", "ZCOOL XiaoWei", cursive, serif;
+      --font-clean-cn: "ZCOOL XiaoWei", "Songti SC", "STSong", "PingFang SC", "Microsoft YaHei", serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020510;
+      color: var(--pearl);
+      font-family: var(--font-art-cn);
+      user-select: none;
+      touch-action: manipulation;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    #glCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    /* Instant tactile starlight ripple right where she clicks to launch a firework */
+    .click-beacon {
+      position: fixed;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 4;
+      border: 1.5px solid rgba(130, 232, 255, 0.92);
+      box-shadow: 0 0 14px rgba(98, 228, 255, 0.8), inset 0 0 10px rgba(255, 130, 196, 0.55);
+      animation: beaconPulse 0.48s cubic-bezier(0.2, 0.85, 0.3, 1) forwards;
+    }
+
+    @keyframes beaconPulse {
+      0% { transform: scale(0.25); opacity: 0.95; }
+      65% { transform: scale(1.15); opacity: 0.85; }
+      100% { transform: scale(1.65); opacity: 0; }
+    }
+
+    .cinema-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 48%, transparent 56%, rgba(1, 3, 12, 0.50) 100%);
+    }
+
+    .stage-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+      transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .scene-overlay.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Act 1: Opening */
+    #overlayIntro .intro-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .intro-en {
+      font-family: var(--font-script);
+      font-weight: 400;
+      font-size: clamp(3.6rem, 9.4vw, 7.8rem);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      padding: 0 20px;
+      background: linear-gradient(112deg, #c6f6ff 0%, #6ee5ff 30%, #ffffff 52%, #ffc4e4 78%, #ff82c4 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 14px rgba(98, 228, 255, 0.45)) drop-shadow(0 4px 26px rgba(255, 130, 196, 0.24));
+      animation: shimmerSweep 6.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmerSweep {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .intro-cn {
+      font-family: var(--font-art-cn);
+      font-weight: 400;
+      font-size: clamp(1.75rem, 3.6vw, 2.8rem);
+      letter-spacing: 0.36em;
+      padding-left: 0.36em;
+      color: #f4fbff;
+      text-shadow:
+        0 0 12px rgba(98, 228, 255, 0.58),
+        0 0 28px rgba(54, 136, 255, 0.36);
+    }
+
+    .intro-divider {
+      width: 142px;
+      height: 1px;
+      margin: 8px 0 6px;
+      background: linear-gradient(90deg, transparent, rgba(110, 229, 255, 0.9), rgba(255, 152, 210, 0.9), transparent);
+      box-shadow: 0 0 10px rgba(110, 229, 255, 0.65);
+    }
+
+    .intro-to {
+      font-family: var(--font-serif-en);
+      font-size: clamp(1.38rem, 2.7vw, 2.1rem);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      padding-left: 0.24em;
+      color: #ffe0f1;
+      text-shadow:
+        0 0 12px rgba(255, 130, 196, 0.62),
+        0 0 26px rgba(98, 228, 255, 0.38);
+    }
+
+    .intro-to span {
+      font-family: var(--font-script);
+      font-size: 1.32em;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #9deeff;
+      margin-right: 4px;
+    }
+
+    .intro-hint {
+      position: absolute;
+      bottom: clamp(66px, 9.2vh, 90px);
+      font-family: var(--font-clean-cn);
+      font-size: 0.84rem;
+      letter-spacing: 0.22em;
+      color: rgba(214, 240, 255, 0.80);
+      text-shadow: 0 0 10px rgba(98, 228, 255, 0.38);
+      animation: gentlePulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { opacity: 0.52; }
+      50% { opacity: 0.96; }
+    }
+
+    /* Act 2: Sculpted 3D Heart + 181 Days */
+    #overlayHeart .heart-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-6%);
+    }
+
+    .days-prefix {
+      font-family: var(--font-art-cn);
+      font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+      letter-spacing: 0.28em;
+      padding-left: 0.28em;
+      color: rgba(235, 248, 255, 0.96);
+      text-shadow: 0 0 12px rgba(98, 228, 255, 0.6);
+      margin-bottom: 2px;
+    }
+
+    .days-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .days-number {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(3.6rem, 8.6vw, 6.4rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      background: linear-gradient(132deg, #ffffff 8%, #a6eeff 46%, #ffbedf 94%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 16px rgba(98, 228, 255, 0.56)) drop-shadow(0 0 28px rgba(255, 130, 196, 0.42));
+    }
+
+    .days-unit {
+      font-family: var(--font-art-cn);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      color: #ffe3f3;
+      text-shadow: 0 0 14px rgba(255, 130, 196, 0.65);
+    }
+
+    .days-sub {
+      margin-top: 6px;
+      font-family: var(--font-script);
+      font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+      letter-spacing: 0.04em;
+      color: rgba(182, 238, 255, 0.88);
+      text-shadow: 0 0 12px rgba(98, 228, 255, 0.45);
+    }
+
+    /* Act 3: Towering Feathery Christmas Tree Top Title */
+    #overlayTree {
+      justify-content: flex-start;
+      padding-top: clamp(10px, 2.2vh, 24px);
+    }
+
+    .tree-top-title {
+      font-family: var(--font-script);
+      font-weight: 400;
+      font-size: clamp(2.5rem, 5.8vw, 4.7rem);
+      letter-spacing: 0.03em;
+      line-height: 1.04;
+      padding: 0 18px;
+      background: linear-gradient(105deg, #c6f6ff 0%, #68e2ff 32%, #ffffff 55%, #ffc0e2 82%, #ff82c4 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 14px rgba(98, 228, 255, 0.58)) drop-shadow(0 2px 24px rgba(255, 130, 196, 0.34));
+      animation: shimmerSweep 7s ease-in-out infinite;
+    }
+
+    .tree-tap-tip {
+      position: absolute;
+      bottom: clamp(62px, 8.6vh, 84px);
+      font-family: var(--font-clean-cn);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: rgba(214, 240, 255, 0.78);
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(3, 10, 26, 0.38);
+      text-shadow: 0 0 8px rgba(98, 228, 255, 0.4);
+    }
+
+    /* Act 4: Luminous Left-to-Right Stardust Calligraphy Reveal + Subtle I LOVE YOU */
+    #overlayMessage {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .message-halo-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-2%);
+    }
+
+    .message-line-wrap {
+      position: relative;
+      overflow: visible;
+    }
+
+    .message-art-line {
+      font-family: var(--font-art-cn);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      padding-left: 0.08em;
+      line-height: 1.72;
+      white-space: nowrap;
+      background: linear-gradient(96deg, #98eeff 0%, #e4f8ff 36%, #ffffff 54%, #ffc8e8 78%, #ff8cc8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 8px rgba(98, 228, 255, 0.56)) drop-shadow(0 0 18px rgba(255, 130, 196, 0.32));
+      clip-path: inset(0 100% 0 0);
+      opacity: 0;
+    }
+
+    #overlayMessage.active .message-art-line.line-1 {
+      animation: writeReveal 2.2s cubic-bezier(0.25, 0.8, 0.25, 1) 0.45s forwards;
+    }
+
+    #overlayMessage.active .message-art-line.line-2 {
+      animation: writeReveal 2.2s cubic-bezier(0.25, 0.8, 0.25, 1) 1.55s forwards;
+    }
+
+    @keyframes writeReveal {
+      0% { clip-path: inset(0 100% 0 0); opacity: 0.35; }
+      12% { opacity: 1; }
+      100% { clip-path: inset(0 0% 0 0); opacity: 0.96; }
+    }
+
+    .whisper-love {
+      position: absolute;
+      right: clamp(-36px, -2.2vw, -4px);
+      bottom: clamp(-54px, -6.5vh, -34px);
+      font-family: var(--font-script);
+      font-weight: 400;
+      font-size: clamp(1.55rem, 2.75vw, 2.4rem);
+      letter-spacing: 0.12em;
+      padding-left: 0.12em;
+      color: #e6dcff;
+      text-shadow:
+        0 0 10px rgba(98, 228, 255, 0.38),
+        0 0 18px rgba(255, 130, 196, 0.36);
+      opacity: 0;
+      pointer-events: none;
+      animation: whisperBreath 5.6s ease-in-out 2.2s infinite;
+      animation-play-state: paused;
+    }
+
+    #overlayMessage.active .whisper-love {
+      animation-play-state: running;
+    }
+
+    @keyframes whisperBreath {
+      0%, 100% { opacity: 0.09; transform: translate3d(0, 2px, 0); }
+      45%, 58% { opacity: 0.34; transform: translate3d(0, -1px, 0); }
+    }
+
+    /* Minimal Luxury Glass Controls */
+    .hud-controls {
+      position: fixed;
+      bottom: clamp(14px, 2.5vh, 24px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      background: rgba(5, 13, 34, 0.56);
+      border: 1px solid rgba(124, 222, 255, 0.24);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 28px rgba(0, 4, 18, 0.48);
+      pointer-events: auto;
+    }
+
+    .stage-dots {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stage-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(188, 228, 255, 0.34);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      padding: 0;
+    }
+
+    .stage-dot:hover {
+      background: rgba(255, 178, 222, 0.85);
+      transform: scale(1.25);
+    }
+
+    .stage-dot.active {
+      width: 24px;
+      background: linear-gradient(90deg, var(--ice-blue), var(--rose-pink));
+      box-shadow: 0 0 12px rgba(98, 228, 255, 0.75);
+    }
+
+    .hud-sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(165, 220, 255, 0.22);
+    }
+
+    .hud-btn {
+      background: none;
+      border: none;
+      color: rgba(224, 244, 255, 0.82);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+
+    .hud-btn:hover {
+      color: #ffffff;
+      background: rgba(110, 220, 255, 0.16);
+      transform: scale(1.06);
+    }
+
+    .hud-btn.active {
+      color: var(--blush-pink);
+      text-shadow: 0 0 10px rgba(255, 130, 196, 0.65);
+    }
+
+    .hud-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 640px) {
+      .intro-cn { letter-spacing: 0.24em; padding-left: 0.24em; }
+      .whisper-love { right: 2%; bottom: -44px; }
+      .hud-controls { padding: 6px 13px; gap: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="glCanvas"></canvas>
+  <div class="cinema-vignette"></div>
+
+  <div class="stage-layer">
+    <!-- Act 1: Opening -->
+    <section class="scene-overlay active" id="overlayIntro" aria-label="圣诞节快乐首页">
+      <div class="intro-frame">
+        <h1 class="intro-en">Merry Christmas</h1>
+        <p class="intro-cn">圣诞节快乐</p>
+        <div class="intro-divider"></div>
+        <p class="intro-to"><span>to：</span>PYQ</p>
+      </div>
+      <p class="intro-hint" id="introHint">轻触屏幕开启旋律 · 星光即将自动流转</p>
+    </section>
+
+    <!-- Act 2: Heart + 181 Days -->
+    <section class="scene-overlay" id="overlayHeart" aria-label="在一起的第181天">
+      <div class="heart-center">
+        <p class="days-prefix">在一起的第</p>
+        <div class="days-row">
+          <span class="days-number" id="daysCounter">0</span>
+          <span class="days-unit">天</span>
+        </div>
+        <p class="days-sub">Every heartbeat since day one</p>
+      </div>
+    </section>
+
+    <!-- Act 3: Realistic Feathery Christmas Tree + Top Merry Christmas + Interactive Fireworks -->
+    <section class="scene-overlay" id="overlayTree" aria-label="真实松针流光圣诞树与烟火">
+      <h2 class="tree-top-title">Merry Christmas</h2>
+      <p class="tree-tap-tip">点击夜空任意位置，烟花将在指尖精准绽放</p>
+    </section>
+
+    <!-- Act 4: Stardust Calligraphy + Subtle I LOVE YOU -->
+    <section class="scene-overlay" id="overlayMessage" aria-label="写给小故的圣诞祝福">
+      <div class="message-halo-wrap">
+        <div class="message-line-wrap">
+          <div class="message-art-line line-1" id="msgLine1">小故，谢谢你一路走来的陪伴，</div>
+          <div class="message-art-line line-2" id="msgLine2">希望你快乐，不止圣诞这一天</div>
+        </div>
+        <span class="whisper-love" aria-hidden="true">I Love You</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Minimal Controls -->
+  <nav class="hud-controls" aria-label="场景控制">
+    <div class="stage-dots">
+      <button class="stage-dot active" data-act="0" title="序章 · Merry Christmas" aria-label="切换到首页"></button>
+      <button class="stage-dot" data-act="1" title="心动 · 181天" aria-label="切换到181天爱心"></button>
+      <button class="stage-dot" data-act="2" title="星树 · 烟火圣诞树" aria-label="切换到流光圣诞树"></button>
+      <button class="stage-dot" data-act="3" title="告白 · 写给小故" aria-label="切换到粒子祝福语"></button>
+    </div>
+    <div class="hud-sep"></div>
+    <button class="hud-btn" id="btnNext" title="下一幕" aria-label="下一幕">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <button class="hud-btn" id="btnReplay" title="重新播放全流程" aria-label="重新播放">
+      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+    </button>
+    <button class="hud-btn" id="btnAudio" title="八音盒旋律开关" aria-label="切换音乐">
+      <svg id="iconAudioOff" viewBox="0 0 24 24">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="22" y1="9" x2="16" y2="15"></line>
+        <line x1="16" y1="9" x2="22" y2="15"></line>
+      </svg>
+      <svg id="iconAudioOn" viewBox="0 0 24 24" style="display:none">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('glCanvas');
+      const gl = canvas.getContext('webgl', {
+        alpha: false,
+        antialias: true,
+        depth: true,
+        powerPreference: 'high-performance'
+      });
+
+      const overlays = [
+        document.getElementById('overlayIntro'),
+        document.getElementById('overlayHeart'),
+        document.getElementById('overlayTree'),
+        document.getElementById('overlayMessage')
+      ];
+      const dots = Array.from(document.querySelectorAll('.stage-dot'));
+      const daysCounterEl = document.getElementById('daysCounter');
+      const msgLine1El = document.getElementById('msgLine1');
+      const msgLine2El = document.getElementById('msgLine2');
+      const introHintEl = document.getElementById('introHint');
+      const btnNext = document.getElementById('btnNext');
+      const btnReplay = document.getElementById('btnReplay');
+      const btnAudio = document.getElementById('btnAudio');
+      const iconAudioOff = document.getElementById('iconAudioOff');
+      const iconAudioOn = document.getElementById('iconAudioOn');
+
+      const ACT_INTRO = 0;
+      const ACT_HEART = 1;
+      const ACT_TREE = 2;
+      const ACT_MESSAGE = 3;
+
+      const ACT_DURATIONS = [4600, 6200, 14500, Infinity];
+      const MESSAGE_LINES = [
+        '小故，谢谢你一路走来的陪伴，',
+        '希望你快乐，不止圣诞这一天'
+      ];
+
+      // Zero-dependency Web Audio API Crystalline Music Box
+      const MusicBox = (() => {
+        let audioCtx = null, masterGain = null, playing = false, timer = null, noteIdx = 0;
+        const melody = [
+          { f: 392.0, d: 0.45 }, { f: 523.25, d: 0.45 }, { f: 523.25, d: 0.25 }, { f: 587.33, d: 0.25 },
+          { f: 523.25, d: 0.25 }, { f: 493.88, d: 0.25 }, { f: 440.0, d: 0.48 }, { f: 440.0, d: 0.48 },
+          { f: 440.0, d: 0.45 }, { f: 587.33, d: 0.45 }, { f: 587.33, d: 0.25 }, { f: 659.25, d: 0.25 },
+          { f: 587.33, d: 0.25 }, { f: 523.25, d: 0.25 }, { f: 493.88, d: 0.48 }, { f: 392.0, d: 0.48 },
+          { f: 392.0, d: 0.45 }, { f: 659.25, d: 0.45 }, { f: 659.25, d: 0.25 }, { f: 698.46, d: 0.25 },
+          { f: 659.25, d: 0.25 }, { f: 587.33, d: 0.25 }, { f: 523.25, d: 0.48 }, { f: 440.0, d: 0.48 },
+          { f: 392.0, d: 0.25 }, { f: 392.0, d: 0.25 }, { f: 440.0, d: 0.48 }, { f: 587.33, d: 0.48 },
+          { f: 493.88, d: 0.48 }, { f: 523.25, d: 0.95 },
+          { f: 783.99, d: 0.55 }, { f: 659.25, d: 0.45 }, { f: 587.33, d: 0.45 }, { f: 523.25, d: 0.9 }
+        ];
+        function init() {
+          if (!audioCtx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (!Ctx) return false;
+            audioCtx = new Ctx();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.22;
+            masterGain.connect(audioCtx.destination);
+          }
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          return true;
+        }
+        function playTone(freq, dur) {
+          if (!audioCtx || !playing) return;
+          const now = audioCtx.currentTime;
+          const o1 = audioCtx.createOscillator(), o2 = audioCtx.createOscillator();
+          const g1 = audioCtx.createGain(), g2 = audioCtx.createGain();
+          o1.type = 'sine'; o1.frequency.setValueAtTime(freq, now);
+          o2.type = 'triangle'; o2.frequency.setValueAtTime(freq * 2, now);
+          g1.gain.setValueAtTime(0.0001, now);
+          g1.gain.exponentialRampToValueAtTime(0.32, now + 0.018);
+          g1.gain.exponentialRampToValueAtTime(0.0001, now + Math.max(1.3, dur * 2.2));
+          g2.gain.setValueAtTime(0.0001, now);
+          g2.gain.exponentialRampToValueAtTime(0.08, now + 0.012);
+          g2.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+          o1.connect(g1); o2.connect(g2); g1.connect(masterGain); g2.connect(masterGain);
+          o1.start(now); o2.start(now);
+          o1.stop(now + Math.max(1.4, dur * 2.4)); o2.stop(now + 0.65);
+          if (noteIdx % 4 === 0) {
+            const p = audioCtx.createOscillator(), pg = audioCtx.createGain();
+            p.type = 'sine'; p.frequency.setValueAtTime(freq * 0.5, now);
+            pg.gain.setValueAtTime(0.0001, now);
+            pg.gain.exponentialRampToValueAtTime(0.09, now + 0.12);
+            pg.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
+            p.connect(pg); pg.connect(masterGain); p.start(now); p.stop(now + 2.3);
+          }
+        }
+        function step() {
+          if (!playing) return;
+          const item = melody[noteIdx % melody.length];
+          playTone(item.f, item.d);
+          noteIdx++;
+          timer = setTimeout(step, item.d * 1000);
+        }
+        return {
+          start() {
+            if (playing || !init()) return;
+            playing = true;
+            btnAudio.classList.add('active');
+            iconAudioOff.style.display = 'none';
+            iconAudioOn.style.display = 'block';
+            step();
+          },
+          stop() {
+            playing = false;
+            clearTimeout(timer);
+            btnAudio.classList.remove('active');
+            iconAudioOff.style.display = 'block';
+            iconAudioOn.style.display = 'none';
+          },
+          toggle() { if (playing) this.stop(); else this.start(); },
+          isPlaying() { return playing; }
+        };
+      })();
+
+      if (!gl) {
+        document.body.innerHTML = '<div style="display:flex;height:100vh;align-items:center;justify-content:center;color:#dff4ff;font-size:18px;">当前浏览器未开启 WebGL，请使用新版 Safari / Chrome / 微信打开。</div>';
+        return;
+      }
+
+      // ---- Compact 3D Matrix Math ----
+      function mat4Perspective(fovRad, aspect, near, far) {
+        const f = 1.0 / Math.tan(fovRad * 0.5);
+        const nf = 1.0 / (near - far);
+        return new Float32Array([
+          f / aspect, 0, 0, 0,
+          0, f, 0, 0,
+          0, 0, (far + near) * nf, -1,
+          0, 0, (2 * far * near) * nf, 0
+        ]);
+      }
+
+      function mat4LookAt(eye, target, up) {
+        let zx = eye[0] - target[0], zy = eye[1] - target[1], zz = eye[2] - target[2];
+        let zl = Math.hypot(zx, zy, zz) || 1;
+        zx /= zl; zy /= zl; zz /= zl;
+
+        let xx = up[1] * zz - up[2] * zy;
+        let xy = up[2] * zx - up[0] * zz;
+        let xz = up[0] * zy - up[1] * zx;
+        let xl = Math.hypot(xx, xy, xz) || 1;
+        xx /= xl; xy /= xl; xz /= xl;
+
+        let yx = zy * xz - zz * xy;
+        let yy = zz * xx - zx * xz;
+        let yz = zx * xy - zy * xx;
+
+        return new Float32Array([
+          xx, yx, zx, 0,
+          xy, yy, zy, 0,
+          xz, yz, zz, 0,
+          -(xx * eye[0] + xy * eye[1] + xz * eye[2]),
+          -(yx * eye[0] + yy * eye[1] + yz * eye[2]),
+          -(zx * eye[0] + zy * eye[1] + zz * eye[2]),
+          1
+        ]);
+      }
+
+      function compileShader(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.error('Shader error:', gl.getShaderInfoLog(s));
+        }
+        return s;
+      }
+
+      function createProgram(vsSrc, fsSrc) {
+        const p = gl.createProgram();
+        gl.attachShader(p, compileShader(gl.VERTEX_SHADER, vsSrc));
+        gl.attachShader(p, compileShader(gl.FRAGMENT_SHADER, fsSrc));
+        gl.linkProgram(p);
+        if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+          console.error('Program link error:', gl.getProgramInfoLog(p));
+        }
+        return p;
+      }
+
+      // ============================================================
+      // SHADER 1: Deep Midnight Sky + Subtle Polar Aurora + Frozen Mirror Ice Lake
+      // ============================================================
+      const skyVS = `
+        attribute vec2 aPos;
+        varying vec2 vUv;
+        void main() {
+          vUv = aPos * 0.5 + 0.5;
+          gl_Position = vec4(aPos, 0.0, 1.0);
+        }
+      `;
+      const skyFS = `
+        precision highp float;
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uHorizonY;
+        uniform float uLakeAlpha;
+        uniform vec2 uResolution;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+        }
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+            u.y
+          );
+        }
+
+        void main() {
+          vec2 uv = vUv;
+          vec3 zenith = vec3(0.006, 0.015, 0.052);
+          vec3 midSky = vec3(0.018, 0.044, 0.125);
+          vec3 horizonGlow = vec3(0.040, 0.102, 0.228);
+
+          float yAbove = clamp((uv.y - uHorizonY) / max(0.001, 1.0 - uHorizonY), 0.0, 1.0);
+          vec3 col = mix(horizonGlow, midSky, pow(yAbove, 0.45));
+          col = mix(col, zenith, pow(yAbove, 1.2));
+
+          // Delicate polar aurora curtains
+          float t = uTime * 0.14;
+          float wave1 = sin(uv.x * 4.2 + t * 1.4 + noise(vec2(uv.x * 2.5, t)) * 2.2) * 0.08;
+          float band1 = exp(-pow((uv.y - (0.72 + wave1)) * 5.2, 2.0));
+          float n1 = noise(vec2(uv.x * 5.0 - t * 0.6, uv.y * 2.4 + t * 0.3));
+          vec3 auroraBlue = vec3(0.14, 0.65, 0.98) * band1 * n1 * 0.20;
+
+          float wave2 = cos(uv.x * 3.4 - t * 1.1 + noise(vec2(uv.x * 2.0 + 4.0, t)) * 2.0) * 0.07;
+          float band2 = exp(-pow((uv.y - (0.64 + wave2)) * 5.8, 2.0));
+          float n2 = noise(vec2(uv.x * 4.2 + t * 0.5, uv.y * 2.8 - t * 0.25));
+          vec3 auroraPink = vec3(0.92, 0.36, 0.68) * band2 * n2 * 0.12;
+
+          col += (auroraBlue + auroraPink) * smoothstep(uHorizonY - 0.02, uHorizonY + 0.18, uv.y);
+
+          // Frozen mirror ice lake
+          if (uv.y < uHorizonY && uLakeAlpha > 0.01) {
+            float depth = clamp((uHorizonY - uv.y) / max(0.001, uHorizonY), 0.0, 1.0);
+            vec3 iceNear = vec3(0.028, 0.074, 0.175);
+            vec3 iceFar = vec3(0.006, 0.016, 0.048);
+            vec3 iceCol = mix(iceNear, iceFar, pow(depth, 0.62));
+
+            float persp = 1.0 / (depth + 0.08);
+            float rip = sin(persp * 2.8 - uTime * 1.3 + noise(vec2(uv.x * 16.0, persp * 0.6)) * 3.0);
+            float spec = smoothstep(0.76, 1.0, rip) * (1.0 - depth) * 0.075;
+            iceCol += vec3(0.32, 0.78, 1.0) * spec;
+
+            float hLine = exp(-pow((uHorizonY - uv.y) * 145.0, 2.0)) * 0.30;
+            iceCol += vec3(0.45, 0.88, 1.0) * hLine;
+
+            col = mix(col, iceCol, uLakeAlpha);
+          }
+
+          float radial = length((uv - vec2(0.5, 0.50)) * vec2(uResolution.x / max(1.0, uResolution.y), 1.0));
+          col += vec3(0.04, 0.14, 0.28) * exp(-radial * radial * 3.8) * 0.30;
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      // ============================================================
+      // SHADER 2: Authentic Organic Feathery 3D Pine-Needle Bough Clusters (NO UGLY POLYGON CONES!)
+      // ============================================================
+      const pineVS = `
+        precision highp float;
+        attribute vec3 aPos;
+        attribute vec3 aNorm;   // outward & upward branch normal for frost & lighting
+        attribute vec4 aMeta;   // x: size, y: rotAngle, z: snowFactor, w: depthShade (0=inner dark, 1=outer tip)
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uRotY;
+        uniform float uMirror;
+        uniform float uFloorY;
+        uniform float uTime;
+        uniform float uDpr;
+        uniform float uMaxPt;
+
+        varying vec3 vNorm;
+        varying vec3 vWorldPos;
+        varying vec4 vMeta;
+        varying float vMirrorFade;
+
+        mat2 rot2(float a) {
+          float c = cos(a), s = sin(a);
+          return mat2(c, -s, s, c);
+        }
+
+        void main() {
+          vec3 pos = aPos;
+          vec3 n = aNorm;
+
+          // Subtle organic wind breath on outer drooping bough tips
+          float sway = sin(uTime * 1.4 + pos.y * 1.8 + aMeta.y) * 0.018 * aMeta.w;
+          pos.x += sway;
+          pos.z += sway * 0.7;
+
+          pos.xz = rot2(uRotY) * pos.xz;
+          n.xz = rot2(uRotY) * n.xz;
+
+          float mFade = 1.0;
+          if (uMirror > 0.5) {
+            if (pos.y < uFloorY) {
+              gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+              gl_PointSize = 0.0;
+              return;
+            }
+            float d = pos.y - uFloorY;
+            pos.y = uFloorY - d;
+            pos.x += sin(pos.z * 2.2 + uTime * 2.0 + d * 1.4) * 0.03 * min(1.0, d * 0.4);
+            n.y = -n.y;
+            mFade = exp(-d * 0.36) * 0.46;
+          }
+
+          vec4 mv = uView * vec4(pos, 1.0);
+          gl_Position = uProj * mv;
+          float viewDepth = max(1.5, -mv.z);
+          gl_PointSize = clamp(aMeta.x * (215.0 / viewDepth) * uDpr, 4.0 * uDpr, uMaxPt);
+
+          vNorm = normalize(n);
+          vWorldPos = pos;
+          vMeta = aMeta;
+          vMirrorFade = mFade;
+        }
+      `;
+
+      const pineFS = `
+        precision highp float;
+        varying vec3 vNorm;
+        varying vec3 vWorldPos;
+        varying vec4 vMeta;
+        varying float vMirrorFade;
+
+        uniform vec3 uCamPos;
+        uniform float uTime;
+        uniform float uOpacity;
+        uniform float uMirror;
+
+        void main() {
+          vec2 p = gl_PointCoord * 2.0 - 1.0;
+          float r = length(p);
+          if (r > 1.0) discard;
+
+          // Procedural feathery radiating evergreen spruce needle cluster (9 needles + organic tuft core!)
+          float ang = atan(p.y, p.x) + vMeta.y;
+          float needles1 = pow(0.5 + 0.5 * cos(ang * 9.0), 1.8);
+          float needles2 = pow(0.5 + 0.5 * cos(ang * 5.0 + 1.3), 2.0);
+          float edgeRadius = 0.52 + needles1 * 0.36 + needles2 * 0.12;
+
+          float feather = smoothstep(edgeRadius, edgeRadius - 0.24, r);
+          // Slight center twig density + delicate fine gaps between outer needles
+          float alpha = feather * uOpacity * vMirrorFade;
+          if (alpha < 0.22) discard;
+
+          vec3 N = normalize(vNorm);
+          vec3 V = normalize(uCamPos - vWorldPos);
+          vec3 L_moon = normalize(vec3(0.32, 0.90, 0.48));
+          vec3 L_blue = normalize(vec3(-0.82, 0.20, 0.65));
+          vec3 L_pink = normalize(vec3(0.84, -0.10, 0.58));
+
+          float diffMoon = max(dot(N, L_moon), 0.0);
+          float diffBlue = max(dot(N, L_blue), 0.0);
+          float diffPink = max(dot(N, L_pink), 0.0);
+          float rim = pow(1.0 - max(dot(N, V), 0.0), 2.4);
+
+          // Rich authentic deep Norwegian spruce green (darker inside trunk core, lush green on outer needles!)
+          float tipShade = vMeta.w;
+          vec3 pineDark = vec3(0.012, 0.075, 0.062);
+          vec3 pineRich = vec3(0.042, 0.215, 0.165);
+          vec3 pineTip  = vec3(0.078, 0.310, 0.255);
+          vec3 baseCol = mix(pineDark, mix(pineRich, pineTip, r * 0.65), tipShade);
+
+          // Realistic lighting + delicate winter frost/snow kissed on upper needle tips
+          vec3 col = baseCol * (0.48 + diffMoon * 0.95);
+          float snowTouch = vMeta.z * smoothstep(0.18, 0.72, r) * smoothstep(-0.3, 0.5, -p.y);
+          vec3 frostCol = vec3(0.76, 0.93, 1.0) * (0.68 + diffMoon * 0.42);
+          col = mix(col, frostCol, clamp(snowTouch * 0.78, 0.0, 0.78));
+
+          // Magical fairy-light & ribbon glow bouncing off the real spruce needles
+          float wave = 0.5 + 0.5 * sin(vWorldPos.y * 3.4 - uTime * 2.4);
+          col += vec3(0.12, 0.66, 1.0) * (diffBlue * 0.16 + rim * 0.38) * (0.65 + 0.35 * wave) * tipShade;
+          col += vec3(0.98, 0.36, 0.70) * (diffPink * 0.14 + rim * 0.24) * (1.0 - 0.3 * wave) * tipShade;
+
+          // Warm-white starlight washing gently down the crown needles
+          float topGlow = exp(-max(0.0, 4.18 - vWorldPos.y) * 1.05);
+          col += vec3(0.70, 0.92, 1.0) * topGlow * 0.34;
+
+          if (uMirror > 0.5) {
+            col = mix(col, vec3(0.14, 0.48, 0.80), 0.36);
+          }
+
+          gl_FragColor = vec4(col, alpha);
+        }
+      `;
+
+      // ============================================================
+      // SHADER 3: 3D Cedar Trunk & Glossy Crystal Baubles Mesh
+      // ============================================================
+      const solidVS = `
+        precision highp float;
+        attribute vec3 aPos;
+        attribute vec3 aNorm;
+        attribute vec3 aCol;
+        attribute float aMat; // 0 = dark cedar bark trunk, 1 = glossy crystal glass ornament
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uRotY;
+        uniform float uMirror;
+        uniform float uFloorY;
+        uniform float uTime;
+
+        varying vec3 vWorldPos;
+        varying vec3 vNorm;
+        varying vec3 vCol;
+        varying float vMat;
+        varying float vMirrorFade;
+
+        mat2 rot2(float a) {
+          float c = cos(a), s = sin(a);
+          return mat2(c, -s, s, c);
+        }
+
+        void main() {
+          vec3 pos = aPos;
+          vec3 n = aNorm;
+          pos.xz = rot2(uRotY) * pos.xz;
+          n.xz = rot2(uRotY) * n.xz;
+
+          float mFade = 1.0;
+          if (uMirror > 0.5) {
+            float d = max(0.0, pos.y - uFloorY);
+            pos.y = uFloorY - d;
+            pos.x += sin(pos.z * 2.2 + uTime * 2.0 + d * 1.4) * 0.03 * min(1.0, d * 0.4);
+            n.y = -n.y;
+            mFade = exp(-d * 0.34) * 0.45;
+          }
+
+          vWorldPos = pos;
+          vNorm = normalize(n);
+          vCol = aCol;
+          vMat = aMat;
+          vMirrorFade = mFade;
+          gl_Position = uProj * uView * vec4(pos, 1.0);
+        }
+      `;
+
+      const solidFS = `
+        precision highp float;
+        varying vec3 vWorldPos;
+        varying vec3 vNorm;
+        varying vec3 vCol;
+        varying float vMat;
+        varying float vMirrorFade;
+
+        uniform vec3 uCamPos;
+        uniform float uOpacity;
+        uniform float uMirror;
+
+        void main() {
+          vec3 N = normalize(vNorm);
+          vec3 V = normalize(uCamPos - vWorldPos);
+          vec3 L1 = normalize(vec3(0.35, 0.90, 0.50));
+          vec3 L2 = normalize(vec3(-0.80, 0.25, 0.65));
+
+          float d1 = max(dot(N, L1), 0.0);
+          float d2 = max(dot(N, L2), 0.0);
+          float rim = pow(1.0 - max(dot(N, V), 0.0), 2.5);
+          vec3 col = vCol;
+
+          if (vMat < 0.5) {
+            // Textured dark winter cedar bark trunk
+            float barkGrain = 0.88 + 0.12 * sin(vWorldPos.y * 18.0 + atan(vWorldPos.z, vWorldPos.x) * 10.0);
+            col = vCol * barkGrain * (0.42 + d1 * 0.72) + vec3(0.08, 0.24, 0.40) * (d2 * 0.22 + rim * 0.28);
+          } else {
+            // Jewel-like reflective glass bauble with crisp double specular catchlights
+            vec3 H1 = normalize(L1 + V);
+            vec3 H2 = normalize(L2 + V);
+            float spec1 = pow(max(dot(N, H1), 0.0), 54.0);
+            float spec2 = pow(max(dot(N, H2), 0.0), 24.0);
+            col = vCol * (0.36 + d1 * 0.78 + d2 * 0.34)
+                + vec3(1.0) * spec1 * 1.35
+                + vec3(0.60, 0.92, 1.0) * spec2 * 0.65
+                + vCol * rim * 0.85;
+          }
+
+          if (uMirror > 0.5) col = mix(col, vec3(0.18, 0.55, 0.88), 0.35);
+          gl_FragColor = vec4(col, clamp(uOpacity * vMirrorFade, 0.0, 1.0));
+        }
+      `;
+
+      // ============================================================
+      // SHADER 4: 18,500+ 3D Volumetric Morphing Particles (DOF + 4-Point Diamond Glints + Ice Reflection)
+      // ============================================================
+      const particleVS = `
+        precision highp float;
+        attribute vec3 aFromPos;
+        attribute vec3 aToPos;
+        attribute vec3 aFromCol;
+        attribute vec3 aToCol;
+        attribute vec4 aSeed; // x: phase, y: size, z: role, w: stagger
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uTime;
+        uniform float uMorph;
+        uniform float uAct;
+        uniform float uActElapsed;
+        uniform float uBeat;
+        uniform float uRotY;
+        uniform float uMirror;
+        uniform float uFloorY;
+        uniform float uFocusDist;
+        uniform float uDpr;
+        uniform float uMaxPt;
+        uniform vec2 uPointerWorld;
+        uniform float uPointerOn;
+
+        varying vec3 vCol;
+        varying float vAlpha;
+        varying float vSharp;
+        varying float vStar;
+
+        mat2 rot2(float a) {
+          float c = cos(a), s = sin(a);
+          return mat2(c, -s, s, c);
+        }
+
+        void main() {
+          float phase = aSeed.x;
+          float baseSz = aSeed.y;
+          float role = aSeed.z;
+          float stagger = aSeed.w;
+
+          float tLocal = clamp((uMorph * 1.32 - stagger * 0.32), 0.0, 1.0);
+          float ease = tLocal * tLocal * (3.0 - 2.0 * tLocal);
+
+          vec3 pos = mix(aFromPos, aToPos, ease);
+
+          // Dramatic 3D spiral vortex arc during transitions
+          float midArc = sin(ease * 3.14159265);
+          if (midArc > 0.001) {
+            float swirlAng = midArc * (1.45 + 0.65 * sin(phase));
+            pos.xz = rot2(swirlAng) * pos.xz;
+            pos.y += midArc * 0.60 * sin(phase * 2.3);
+          }
+
+          vec3 col = mix(aFromCol, aToCol, ease);
+          float alpha = 1.0;
+
+          if (uAct < 0.5) {
+            if (role < 1.5) {
+              pos.xz = rot2(uTime * 0.18) * pos.xz;
+              pos.y += sin(uTime * 0.7 + phase) * 0.08;
+            } else {
+              pos.y = mod(pos.y - uTime * 0.45 + 6.0, 12.0) - 6.0;
+              pos.x += sin(uTime * 0.5 + phase) * 0.18;
+            }
+          } else if (uAct < 1.5) {
+            if (role < 1.5) {
+              pos *= uBeat;
+              pos.xz = rot2(uRotY) * pos.xz;
+              pos.y += 0.25;
+            } else if (role < 2.5) {
+              pos.xz = rot2(uTime * 0.44) * pos.xz;
+              pos.y += 0.25;
+            } else {
+              pos.y = mod(pos.y - uTime * 0.35 + 6.0, 12.0) - 6.0;
+              pos.x += sin(uTime * 0.55 + phase) * 0.16;
+            }
+          } else if (uAct < 2.5) {
+            if (role < 4.5) {
+              if (role > 1.5 && role < 2.5) {
+                // Blazing upward-spiraling stardust streams racing up the Christmas tree
+                float flow = fract(stagger - uTime * 0.095);
+                float hNorm = flow;
+                float turns = 5.2;
+                float strand = mod(floor(phase * 10.0), 3.0);
+                float ang = hNorm * 6.2831853 * turns + strand * 2.094395;
+                float r = pow(hNorm, 0.88) * 3.15 + 0.16 + 0.06 * sin(phase * 4.0);
+                pos.x = cos(ang) * r;
+                pos.z = sin(ang) * r;
+                pos.y = (0.5 - hNorm) * 7.1 + 0.55;
+              } else if (role > 3.5 && role < 4.5) {
+                // Expanding luminous frozen-lake ripple ring around the base
+                float expand = fract(stagger + uTime * 0.14);
+                float rr = 0.8 + expand * 5.2;
+                float ang = phase + uTime * 0.15;
+                pos.x = cos(ang) * rr;
+                pos.z = sin(ang) * rr;
+                pos.y = uFloorY + 0.04;
+                alpha *= sin(expand * 3.14159265) * 0.82;
+              }
+              pos.xz = rot2(uRotY) * pos.xz;
+            } else {
+              // Magical rising fairy embers + falling snow
+              if (fract(phase * 3.1) > 0.5) {
+                pos.y = mod(pos.y + uTime * 0.42 + 4.0, 10.0) - 3.6;
+              } else {
+                pos.y = mod(pos.y - uTime * 0.36 + 6.5, 13.0) - 6.5;
+              }
+              pos.x += sin(uTime * 0.55 + phase) * 0.24;
+            }
+          } else {
+            if (role < 1.5) {
+              float wave = sin(uTime * 2.2 + phase) * 0.012;
+              pos.x += wave;
+              pos.y += cos(uTime * 1.9 + phase) * 0.012;
+
+              float brushX = -6.2 + min(uActElapsed * 3.6, 13.5);
+              float distBrush = abs(pos.x - brushX);
+              float ignite = exp(-distBrush * distBrush * 1.6) * smoothstep(4.6, 0.0, uActElapsed);
+              col += vec3(0.45, 0.72, 1.0) * ignite;
+              baseSz *= (1.0 + ignite * 0.9);
+
+              if (uPointerOn > 0.5) {
+                vec2 d = pos.xy - uPointerWorld;
+                float dist = length(d);
+                if (dist < 1.15 && dist > 0.001) {
+                  float f = (1.0 - dist / 1.15);
+                  pos.xy += normalize(d) * f * f * 0.42;
+                }
+              }
+            } else {
+              pos.x += sin(uTime * 0.35 + phase) * 0.25;
+              pos.y += cos(uTime * 0.30 + phase) * 0.18;
+            }
+          }
+
+          if (uMirror > 0.5) {
+            if (pos.y < uFloorY) {
+              gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+              gl_PointSize = 0.0;
+              return;
+            }
+            float distIce = pos.y - uFloorY;
+            pos.y = uFloorY - distIce;
+            pos.x += sin(pos.z * 2.2 + uTime * 2.0 + distIce * 1.6) * 0.035 * min(1.0, distIce * 0.4);
+            alpha *= exp(-distIce * 0.36) * 0.46;
+            col = mix(col, vec3(0.35, 0.78, 1.0), 0.26);
+          }
+
+          vec4 mvPos = uView * vec4(pos, 1.0);
+          float viewDepth = -mvPos.z;
+          gl_Position = uProj * mvPos;
+
+          float coc = clamp(abs(viewDepth - uFocusDist) / 7.5, 0.0, 1.0);
+          vSharp = (uAct > 2.5 && role < 1.5) ? 1.0 : (1.0 - coc * 0.78);
+
+          float twinkle = 0.65 + 0.35 * sin(uTime * (2.8 + fract(phase) * 3.2) + phase * 6.28);
+          float ptSize = (baseSz * (1.0 + coc * 1.15) * (25.0 / max(1.2, viewDepth))) * uDpr;
+          if (uAct > 2.5 && role < 1.5) {
+            ptSize = clamp(baseSz * 2.55 * uDpr, 1.6 * uDpr, 5.4 * uDpr);
+          } else {
+            ptSize = clamp(ptSize * (0.85 + twinkle * 0.35), 1.4 * uDpr, uMaxPt);
+          }
+
+          gl_PointSize = ptSize;
+          vCol = col;
+          vAlpha = alpha * twinkle * (1.0 - coc * 0.30);
+          // More sparkling 4-point cinema diamond glints on tree fairy lights!
+          float starThresh = (uAct > 1.5 && uAct < 2.5 && role < 3.5) ? 0.80 : 0.90;
+          vStar = (fract(phase * 17.3) > starThresh && vSharp > 0.68 && uMirror < 0.5 && !(uAct > 2.5 && role < 1.5)) ? 1.0 : 0.0;
+        }
+      `;
+
+      const particleFS = `
+        precision highp float;
+        varying vec3 vCol;
+        varying float vAlpha;
+        varying float vSharp;
+        varying float vStar;
+
+        void main() {
+          vec2 uv = gl_PointCoord - 0.5;
+          float d = length(uv) * 2.0;
+          if (d > 1.0) discard;
+
+          float core = exp(-d * d * mix(3.4, 14.0, vSharp));
+          float halo = exp(-d * d * mix(1.8, 4.0, vSharp)) * 0.48;
+          float shape = core + halo;
+
+          if (vStar > 0.5) {
+            float sx = exp(-abs(uv.y) * 26.0) * exp(-abs(uv.x) * 4.0);
+            float sy = exp(-abs(uv.x) * 26.0) * exp(-abs(uv.y) * 4.0);
+            shape += (sx + sy) * 1.05;
+          }
+
+          vec3 finalCol = mix(vCol, vec3(1.0), core * 0.74);
+          float a = clamp(shape * vAlpha, 0.0, 1.0);
+          gl_FragColor = vec4(finalCol * a, a);
+        }
+      `;
+
+      // ============================================================
+      // SHADER 5: 3D Volumetric Glowing Aurora-Silk Ribbons Wrapping the Tree
+      // ============================================================
+      const ribbonVS = `
+        precision highp float;
+        attribute vec3 aPos;
+        attribute vec2 aUv;
+        attribute float aRibbonId;
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uRotY;
+        uniform float uMirror;
+        uniform float uFloorY;
+        uniform float uTime;
+
+        varying vec2 vUv;
+        varying float vRibbonId;
+        varying float vDepthFade;
+
+        mat2 rot2(float a) {
+          float c = cos(a), s = sin(a);
+          return mat2(c, -s, s, c);
+        }
+
+        void main() {
+          vec3 pos = aPos;
+          pos.xz = rot2(uRotY) * pos.xz;
+          float fade = 1.0;
+
+          if (uMirror > 0.5) {
+            float distIce = max(0.0, pos.y - uFloorY);
+            pos.y = uFloorY - distIce;
+            pos.x += sin(pos.z * 2.0 + uTime * 2.0) * 0.04;
+            fade = exp(-distIce * 0.34) * 0.46;
+          }
+
+          vec4 mvPos = uView * vec4(pos, 1.0);
+          gl_Position = uProj * mvPos;
+          vUv = aUv;
+          vRibbonId = aRibbonId;
+          vDepthFade = fade * smoothstep(20.0, 6.5, -mvPos.z);
+        }
+      `;
+
+      const ribbonFS = `
+        precision highp float;
+        varying vec2 vUv;
+        varying float vRibbonId;
+        varying float vDepthFade;
+        uniform float uTime;
+        uniform float uOpacity;
+
+        void main() {
+          float edge = exp(-vUv.y * vUv.y * 4.2);
+          float core = exp(-vUv.y * vUv.y * 24.0);
+
+          // Dramatic racing aurora comet pulses ascending the silk ribbons!
+          float speed = vRibbonId < 0.5 ? 0.56 : (vRibbonId < 1.5 ? 0.46 : 0.68);
+          float p1 = fract(uTime * speed + vRibbonId * 0.33);
+          float d1 = abs(vUv.x - p1);
+          d1 = min(d1, 1.0 - d1);
+          float surge = exp(-d1 * d1 * 55.0);
+
+          float p2 = fract(uTime * speed * 0.78 + 0.50 + vRibbonId * 0.21);
+          float d2 = abs(vUv.x - p2);
+          d2 = min(d2, 1.0 - d2);
+          float surge2 = exp(-d2 * d2 * 85.0) * 0.78;
+
+          // Subtle silk energy shimmer texture along ribbon
+          float shimmer = 0.85 + 0.15 * sin(vUv.x * 48.0 - uTime * 8.0);
+
+          vec3 baseCol = vRibbonId < 0.5
+            ? vec3(0.24, 0.86, 1.0)
+            : (vRibbonId < 1.5 ? vec3(1.0, 0.42, 0.76) : vec3(0.45, 0.76, 1.0));
+
+          float intensity = (0.36 + (surge + surge2) * 1.45) * edge * shimmer;
+          vec3 col = mix(baseCol, vec3(1.0), clamp(core * 0.72 + surge * 0.65, 0.0, 1.0));
+          float alpha = clamp(intensity * uOpacity * vDepthFade, 0.0, 1.0);
+          gl_FragColor = vec4(col * alpha, alpha);
+        }
+      `;
+
+      // ============================================================
+      // SHADER 6: Radiant 3D Diamond Tree Star Topper & Anamorphic Lens Flare
+      // ============================================================
+      const starVS = `
+        precision highp float;
+        attribute vec2 aCorner;
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform vec3 uWorldPos;
+        uniform float uScale;
+        uniform float uMirror;
+        uniform float uFloorY;
+        varying vec2 vUv;
+        varying float vFade;
+
+        void main() {
+          vec3 wp = uWorldPos;
+          float fade = 1.0;
+          if (uMirror > 0.5) {
+            float d = max(0.0, wp.y - uFloorY);
+            wp.y = uFloorY - d;
+            fade = exp(-d * 0.34) * 0.48;
+          }
+          vec4 mv = uView * vec4(wp, 1.0);
+          mv.xy += aCorner * uScale;
+          gl_Position = uProj * mv;
+          vUv = aCorner;
+          vFade = fade;
+        }
+      `;
+
+      const starFS = `
+        precision highp float;
+        varying vec2 vUv;
+        varying float vFade;
+        uniform float uTime;
+        uniform float uOpacity;
+
+        void main() {
+          vec2 p = vUv;
+          float r = length(p);
+          if (r > 1.0) discard;
+
+          float pulse = 0.90 + 0.12 * sin(uTime * 4.0);
+          float core = exp(-r * r * 36.0) * 1.55;
+          float halo = exp(-r * r * 6.0) * 0.54;
+
+          float rayH = exp(-abs(p.y) * 26.0) * exp(-abs(p.x) * 2.5) * 1.15;
+          float rayV = exp(-abs(p.x) * 26.0) * exp(-abs(p.y) * 2.6) * 1.15;
+
+          vec2 d45 = vec2(p.x * 0.7071 - p.y * 0.7071, p.x * 0.7071 + p.y * 0.7071);
+          float diag = (exp(-abs(d45.y) * 32.0) * exp(-abs(d45.x) * 4.8) +
+                        exp(-abs(d45.x) * 32.0) * exp(-abs(d45.y) * 4.8)) * 0.72;
+
+          float anamorphic = exp(-abs(p.y) * 40.0) * exp(-abs(p.x) * 1.3) * 0.55;
+
+          vec3 col = vec3(1.0, 0.98, 0.94) * (core + rayH + rayV)
+                   + vec3(0.42, 0.88, 1.0) * (halo + anamorphic + diag * 0.65)
+                   + vec3(1.0, 0.62, 0.84) * (diag * 0.48);
+
+          float alpha = clamp((core + halo + rayH + rayV + diag + anamorphic) * pulse * uOpacity * vFade, 0.0, 1.0);
+          gl_FragColor = vec4(col * alpha, alpha);
+        }
+      `;
+
+      // ============================================================
+      // SHADER 7A & 7B: Cinema-Grade 3D Fireworks (Continuous Glowing Streak Lines + Glittering Heads + Epicenter Flash)
+      // ============================================================
+      const fwLineVS = `
+        precision highp float;
+        attribute vec3 aPos;
+        attribute vec3 aCol;
+        attribute float aAlpha;
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uMirror;
+        uniform float uFloorY;
+
+        varying vec3 vCol;
+        varying float vAlpha;
+
+        void main() {
+          vec3 pos = aPos;
+          float alpha = aAlpha;
+          if (uMirror > 0.5) {
+            float d = max(0.0, pos.y - uFloorY);
+            pos.y = uFloorY - d;
+            alpha *= exp(-d * 0.22) * 0.45;
+          }
+          gl_Position = uProj * uView * vec4(pos, 1.0);
+          vCol = aCol;
+          vAlpha = alpha;
+        }
+      `;
+      const fwLineFS = `
+        precision highp float;
+        varying vec3 vCol;
+        varying float vAlpha;
+        void main() {
+          gl_FragColor = vec4(vCol * vAlpha, vAlpha);
+        }
+      `;
+
+      const fwPtVS = `
+        precision highp float;
+        attribute vec3 aPos;
+        attribute vec3 aCol;
+        attribute float aAlpha;
+        attribute float aSize;
+
+        uniform mat4 uProj;
+        uniform mat4 uView;
+        uniform float uMirror;
+        uniform float uFloorY;
+        uniform float uDpr;
+        uniform float uMaxPt;
+
+        varying vec3 vCol;
+        varying float vAlpha;
+
+        void main() {
+          vec3 pos = aPos;
+          float alpha = aAlpha;
+          if (uMirror > 0.5) {
+            if (pos.y < uFloorY) {
+              gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+              gl_PointSize = 0.0;
+              return;
+            }
+            float d = pos.y - uFloorY;
+            pos.y = uFloorY - d;
+            alpha *= exp(-d * 0.22) * 0.45;
+          }
+          vec4 mv = uView * vec4(pos, 1.0);
+          gl_Position = uProj * mv;
+          gl_PointSize = clamp(aSize * (52.0 / max(2.0, -mv.z)) * uDpr, 2.0 * uDpr, uMaxPt);
+          vCol = aCol;
+          vAlpha = alpha;
+        }
+      `;
+
+      const fwPtFS = `
+        precision highp float;
+        varying vec3 vCol;
+        varying float vAlpha;
+        void main() {
+          vec2 uv = gl_PointCoord - 0.5;
+          float d = length(uv) * 2.0;
+          if (d > 1.0) discard;
+          float core = exp(-d * d * 11.0);
+          float glow = exp(-d * d * 2.4) * 0.85;
+          float star = (exp(-abs(uv.y) * 22.0) * exp(-abs(uv.x) * 4.5) +
+                        exp(-abs(uv.x) * 22.0) * exp(-abs(uv.y) * 4.5)) * 0.45;
+          vec3 col = mix(vCol * 1.45, vec3(1.0), core * 0.80);
+          float a = clamp((core + glow + star) * vAlpha, 0.0, 1.0);
+          gl_FragColor = vec4(col * a, a);
+        }
+      `;
+
+      const skyProg = createProgram(skyVS, skyFS);
+      const pineProg = createProgram(pineVS, pineFS);
+      const solidProg = createProgram(solidVS, solidFS);
+      const particleProg = createProgram(particleVS, particleFS);
+      const ribbonProg = createProgram(ribbonVS, ribbonFS);
+      const starProg = createProgram(starVS, starFS);
+      const fwLineProg = createProgram(fwLineVS, fwLineFS);
+      const fwPtProg = createProgram(fwPtVS, fwPtFS);
+
+      const ptRange = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE) || [1, 64];
+      const MAX_PT = Math.min(64, ptRange[1] || 64);
+
+      const skyBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, skyBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+
+      const starBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+
+      // ---- Build 3D Volumetric Silk Ribbons (3 intertwined luminous aurora ribbons) ----
+      const RIBBON_SEGMENTS = 200;
+      const RIBBON_COUNT = 3;
+      const ribbonData = [];
+      const ribbonStarts = [];
+      const ribbonCounts = [];
+
+      (function buildRibbons() {
+        const treeH = 7.1;
+        const treeBaseR = 3.15;
+        const turns = 5.2;
+        const yCenter = 0.55;
+
+        for (let r = 0; r < RIBBON_COUNT; r++) {
+          ribbonStarts.push(ribbonData.length / 6);
+          const phaseOffset = (r / RIBBON_COUNT) * Math.PI * 2;
+          const width = r === 2 ? 0.065 : 0.11;
+
+          for (let i = 0; i <= RIBBON_SEGMENTS; i++) {
+            const h = i / RIBBON_SEGMENTS; // 0 = bottom, 1 = top
+            const hFromTop = 1.0 - h;
+            const ang = hFromTop * Math.PI * 2 * turns + phaseOffset;
+            const rad = Math.pow(hFromTop, 0.88) * treeBaseR + 0.16;
+            const cx = Math.cos(ang) * rad;
+            const cz = Math.sin(ang) * rad;
+            const cy = (0.5 - hFromTop) * treeH + yCenter;
+
+            ribbonData.push(cx, cy - width, cz, h, -1, r);
+            ribbonData.push(cx, cy + width, cz, h, 1, r);
+          }
+          ribbonCounts.push((RIBBON_SEGMENTS + 1) * 2);
+        }
+      })();
+
+      const ribbonBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, ribbonBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(ribbonData), gl.STATIC_DRAW);
+
+      // ============================================================
+      // BUILD REALISTIC FEATHERY 3D SPRUCE TREE (10,500+ Organic Radiating Pine-Needle Clusters + Cedar Trunk + Glossy Glass Baubles!)
+      // ============================================================
+      let W = window.innerWidth || 1280;
+      let H = window.innerHeight || 800;
+      let DPR = Math.min(window.devicePixelRatio || 1, 2);
+      let isMobile = W < 680;
+
+      const pinePosList = [];
+      const pineNormList = [];
+      const pineMetaList = [];
+      const solidVerts = []; // [x,y,z, nx,ny,nz, r,g,b, mat]
+
+      function pushSolidTri(p1, n1, c1, p2, n2, c2, p3, n3, c3, mat) {
+        solidVerts.push(
+          p1[0], p1[1], p1[2], n1[0], n1[1], n1[2], c1[0], c1[1], c1[2], mat,
+          p2[0], p2[1], p2[2], n2[0], n2[1], n2[2], c2[0], c2[1], c2[2], mat,
+          p3[0], p3[1], p3[2], n3[0], n3[1], n3[2], c3[0], c3[1], c3[2], mat
+        );
+      }
+
+      (function buildOrganicSpruceTree() {
+        // 1. Sturdy dark cedar trunk visibly grounded on frozen ice lake (y = -3.62 up to 3.4)
+        const trunkSegs = 20;
+        const tBotY = -3.62, tTopY = 3.55;
+        const rBot = 0.36, rTop = 0.05;
+        const barkBot = [0.18, 0.11, 0.08];
+        const barkTop = [0.12, 0.08, 0.06];
+
+        for (let i = 0; i < trunkSegs; i++) {
+          const a0 = (i / trunkSegs) * Math.PI * 2;
+          const a1 = ((i + 1) / trunkSegs) * Math.PI * 2;
+          const c0 = Math.cos(a0), s0 = Math.sin(a0);
+          const c1 = Math.cos(a1), s1 = Math.sin(a1);
+          const p00 = [c0 * rBot, tBotY, s0 * rBot];
+          const p10 = [c1 * rBot, tBotY, s1 * rBot];
+          const p01 = [c0 * rTop, tTopY, s0 * rTop];
+          const p11 = [c1 * rTop, tTopY, s1 * rTop];
+          const n0 = [c0, 0.08, s0], n1 = [c1, 0.08, s1];
+          pushSolidTri(p00, n0, barkBot, p10, n1, barkBot, p11, n1, barkTop, 0);
+          pushSolidTri(p00, n0, barkBot, p11, n1, barkTop, p01, n0, barkTop, 0);
+        }
+
+        // 2. Organic Radiating Arched Spruce Branches populated with thousands of feathery needle clusters!
+        const TIERS = 13;
+        const baseBranchY = -2.86; // Leaves ~0.76 units of authentic trunk visible above the frozen lake!
+        const apexY = 4.08;
+        const span = apexY - baseBranchY;
+        const baublePalette = [
+          [0.34, 0.85, 1.00], // crystal ice blue
+          [1.00, 0.46, 0.78], // romantic rose quartz
+          [0.92, 0.96, 1.00], // frosted pearl silver
+          [1.00, 0.86, 0.58]  // warm champagne gold
+        ];
+
+        const densityScale = isMobile ? 0.68 : 1.0;
+
+        for (let t = 0; t < TIERS; t++) {
+          const frac = t / (TIERS - 1); // 0 = bottom widest tier, 1 = slender top crown
+          const yTier = baseBranchY + Math.pow(frac, 0.96) * span;
+          const maxLen = Math.pow(1.0 - frac * 0.91, 0.88) * 3.05;
+          const branchCount = Math.max(6, Math.round((16 - frac * 9) * (0.9 + Math.random() * 0.2)));
+          const tierTwist = t * 1.17;
+
+          for (let b = 0; b < branchCount; b++) {
+            const baseAng = (b / branchCount) * Math.PI * 2 + tierTwist + (Math.random() - 0.5) * 0.22;
+            const bLen = maxLen * (0.86 + Math.random() * 0.26);
+            // Natural evergreen droop: lower boughs arch downward gracefully, upper boughs sweep slightly up!
+            const archLift = (frac - 0.28) * 0.42;
+            const steps = Math.max(5, Math.round((14 - frac * 7) * densityScale));
+
+            for (let s = 0; s <= steps; s++) {
+              const u = s / steps; // 0 = near trunk, 1 = outer needle tip
+              const dist = 0.14 + u * bLen;
+              const droop = -0.32 * Math.pow(u, 1.65) * (1.0 - frac * 0.75) + archLift * u;
+              const bx = Math.cos(baseAng) * dist;
+              const bz = Math.sin(baseAng) * dist;
+              const by = yTier + droop;
+
+              // Add lateral twigs fanning left & right off each main bough for lush feathery fullness!
+              const twigSpan = Math.sin(u * Math.PI) * (0.42 * (1.0 - frac * 0.68));
+              const perpX = -Math.sin(baseAng);
+              const perpZ = Math.cos(baseAng);
+              const subCount = Math.max(2, Math.round((4.5 - frac * 2.0) * densityScale));
+
+              for (let k = 0; k < subCount; k++) {
+                const side = (k / Math.max(1, subCount - 1) - 0.5) * 2.0; // -1..1
+                const jx = bx + perpX * side * twigSpan + (Math.random() - 0.5) * 0.14;
+                const jz = bz + perpZ * side * twigSpan + (Math.random() - 0.5) * 0.14;
+                const jy = by + (Math.random() - 0.5) * 0.16 - Math.abs(side) * 0.08;
+
+                // Outward-and-upward organic normal for natural frost & lighting
+                const nr = Math.hypot(jx, jz) || 1;
+                const nx = (jx / nr) * 0.75 + (Math.random() - 0.5) * 0.25;
+                const ny = 0.55 + (1.0 - Math.abs(side)) * 0.25 + (Math.random() - 0.5) * 0.2;
+                const nz = (jz / nr) * 0.75 + (Math.random() - 0.5) * 0.25;
+
+                const clusterSize = (0.58 - frac * 0.26) * (0.78 + Math.random() * 0.52);
+                const rotAng = Math.random() * Math.PI * 2;
+                const snowFactor = (u > 0.45 ? 0.35 + u * 0.55 : 0.12) * (0.55 + Math.random() * 0.65);
+                const depthShade = 0.22 + u * 0.78;
+
+                pinePosList.push(jx, jy, jz);
+                pineNormList.push(nx, ny, nz);
+                pineMetaList.push(clusterSize, rotAng, snowFactor, depthShade);
+              }
+            }
+
+            // Hang refined glossy 3D crystal baubles gently on select outer branch tips
+            if (b % 2 === (t % 2) && t < TIERS - 1) {
+              const bDist = bLen * (0.78 + Math.random() * 0.18);
+              const bDroop = -0.32 * Math.pow(0.88, 1.65) * (1.0 - frac * 0.75) + archLift * 0.88;
+              const ox = Math.cos(baseAng) * bDist;
+              const oz = Math.sin(baseAng) * bDist;
+              const oy = yTier + bDroop - 0.11;
+              const rad = 0.105 - frac * 0.025;
+              const bCol = baublePalette[(t * 3 + b) % baublePalette.length];
+
+              const latN = 6, lonN = 8;
+              for (let la = 0; la < latN; la++) {
+                const th0 = (la / latN) * Math.PI;
+                const th1 = ((la + 1) / latN) * Math.PI;
+                for (let lo = 0; lo < lonN; lo++) {
+                  const ph0 = (lo / lonN) * Math.PI * 2;
+                  const ph1 = ((lo + 1) / lonN) * Math.PI * 2;
+                  function sPt(th, ph) {
+                    const nx = Math.sin(th) * Math.cos(ph);
+                    const ny = Math.cos(th);
+                    const nz = Math.sin(th) * Math.sin(ph);
+                    return { p: [ox + nx * rad, oy + ny * rad, oz + nz * rad], n: [nx, ny, nz] };
+                  }
+                  const v00 = sPt(th0, ph0), v10 = sPt(th1, ph0);
+                  const v11 = sPt(th1, ph1), v01 = sPt(th0, ph1);
+                  pushSolidTri(v00.p, v00.n, bCol, v10.p, v10.n, bCol, v11.p, v11.n, bCol, 1);
+                  pushSolidTri(v00.p, v00.n, bCol, v11.p, v11.n, bCol, v01.p, v01.n, bCol, 1);
+                }
+              }
+            }
+          }
+        }
+
+        // Dense feathery top crown spire so tip tapers cleanly into the diamond star
+        for (let i = 0; i < 120; i++) {
+          const u = i / 120;
+          const y = 3.55 + u * 0.62;
+          const r = (1.0 - u) * 0.34;
+          const ang = i * 2.39996;
+          pinePosList.push(Math.cos(ang) * r, y, Math.sin(ang) * r);
+          pineNormList.push(Math.cos(ang) * 0.6, 0.8, Math.sin(ang) * 0.6);
+          pineMetaList.push(0.28 * (1.0 - u * 0.45), Math.random() * 6.28, 0.72, 0.9);
+        }
+      })();
+
+      const pineCount = pinePosList.length / 3;
+      const bufPinePos  = gl.createBuffer();
+      const bufPineNorm = gl.createBuffer();
+      const bufPineMeta = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufPinePos);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pinePosList), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufPineNorm);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pineNormList), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufPineMeta);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pineMetaList), gl.STATIC_DRAW);
+
+      const solidCount = solidVerts.length / 10;
+      const solidBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, solidBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(solidVerts), gl.STATIC_DRAW);
+
+      // ---- Main 18,500+ Morphing Particle Pool ----
+      const P_COUNT = isMobile ? 11500 : 18500;
+      const C_ICE      = [0.36, 0.88, 1.00];
+      const C_SAPPHIRE = [0.22, 0.56, 1.00];
+      const C_DIAMOND  = [0.94, 0.98, 1.00];
+      const C_ROSE     = [1.00, 0.46, 0.78];
+      const C_BLUSH    = [1.00, 0.76, 0.90];
+      const C_GOLD     = [1.00, 0.90, 0.66];
+
+      const fromPos = new Float32Array(P_COUNT * 3);
+      const toPos   = new Float32Array(P_COUNT * 3);
+      const fromCol = new Float32Array(P_COUNT * 3);
+      const toCol   = new Float32Array(P_COUNT * 3);
+      const seeds   = new Float32Array(P_COUNT * 4);
+      const formations = [null, null, null, null];
+
+      for (let i = 0; i < P_COUNT; i++) {
+        seeds[i * 4 + 0] = Math.random() * Math.PI * 2;
+        seeds[i * 4 + 1] = 1.0;
+        seeds[i * 4 + 2] = 0.0;
+        seeds[i * 4 + 3] = Math.random();
+      }
+
+      function buildIntroFormation() {
+        const pos = new Float32Array(P_COUNT * 3);
+        const col = new Float32Array(P_COUNT * 3);
+        const sz  = new Float32Array(P_COUNT);
+        const role = new Float32Array(P_COUNT);
+
+        for (let i = 0; i < P_COUNT; i++) {
+          const ratio = i / P_COUNT;
+          let x, y, z, c, s, rl;
+          if (ratio < 0.68) {
+            rl = 1;
+            const a = (i / (P_COUNT * 0.68)) * Math.PI * 2;
+            const band = (Math.random() - 0.5) * 1.5;
+            const r = 4.7 + band;
+            x = Math.cos(a) * r;
+            z = Math.sin(a) * r * 0.72 - 0.8;
+            y = Math.sin(a * 2.0) * 1.25 + (Math.random() - 0.5) * 0.85;
+            const mixPink = Math.sin(a * 2.0 + 0.6) > 0.35;
+            c = mixPink ? (Math.random() < 0.68 ? C_ROSE : C_BLUSH)
+                        : (Math.random() < 0.62 ? C_ICE : (Math.random() < 0.85 ? C_SAPPHIRE : C_DIAMOND));
+            s = 0.75 + Math.random() * 1.25;
+          } else {
+            rl = 2;
+            x = (Math.random() - 0.5) * 18.0;
+            y = (Math.random() - 0.5) * 12.0;
+            z = (Math.random() - 0.5) * 12.0;
+            c = Math.random() < 0.65 ? C_ICE : (Math.random() < 0.86 ? C_DIAMOND : C_BLUSH);
+            s = 0.65 + Math.random() * 1.35;
+          }
+          pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+          col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2];
+          sz[i] = s; role[i] = rl;
+        }
+        return { pos, col, sz, role };
+      }
+
+      function buildHeartFormation() {
+        const pos = new Float32Array(P_COUNT * 3);
+        const col = new Float32Array(P_COUNT * 3);
+        const sz  = new Float32Array(P_COUNT);
+        const role = new Float32Array(P_COUNT);
+
+        const scale = 0.175;
+        for (let i = 0; i < P_COUNT; i++) {
+          const ratio = i / P_COUNT;
+          let x, y, z, c, s, rl;
+
+          if (ratio < 0.54) {
+            rl = 1;
+            const t = (i / (P_COUNT * 0.54)) * Math.PI * 2 + (Math.random() - 0.5) * 0.02;
+            const r = 0.90 + Math.random() * 0.13;
+            x = 16.0 * Math.pow(Math.sin(t), 3) * r * scale;
+            y = (13.0 * Math.cos(t) - 5.0 * Math.cos(2 * t) - 2.0 * Math.cos(3 * t) - Math.cos(4 * t)) * r * scale;
+            z = (Math.random() - 0.5) * 0.72;
+            c = r > 0.99 ? (Math.random() < 0.76 ? C_ICE : C_SAPPHIRE)
+                         : (Math.random() < 0.68 ? C_ROSE : C_BLUSH);
+            s = 0.95 + Math.random() * 1.15;
+          } else if (ratio < 0.82) {
+            rl = 1;
+            const t = Math.random() * Math.PI * 2;
+            const r = 0.62 + Math.pow(Math.random(), 0.52) * 0.30;
+            x = 16.0 * Math.pow(Math.sin(t), 3) * r * scale;
+            y = (13.0 * Math.cos(t) - 5.0 * Math.cos(2 * t) - 2.0 * Math.cos(3 * t) - Math.cos(4 * t)) * r * scale;
+            const depth = Math.sqrt(Math.max(0.04, 1.05 - r * r)) * 1.55;
+            z = (Math.random() * 2.0 - 1.0) * depth;
+            const cr = Math.random();
+            c = cr < 0.52 ? C_ROSE : (cr < 0.76 ? C_ICE : (cr < 0.92 ? C_BLUSH : C_DIAMOND));
+            s = 0.72 + Math.random() * 0.95;
+          } else if (ratio < 0.92) {
+            rl = 2;
+            const a = Math.random() * Math.PI * 2;
+            const rad = 3.85 + (Math.random() - 0.5) * 0.55;
+            x = Math.cos(a) * rad;
+            z = Math.sin(a) * rad;
+            y = Math.sin(a) * rad * 0.28 + (Math.random() - 0.5) * 0.22;
+            c = Math.random() < 0.78 ? C_ICE : C_BLUSH;
+            s = 0.8 + Math.random() * 0.95;
+          } else {
+            rl = 3;
+            x = (Math.random() - 0.5) * 16.0;
+            y = (Math.random() - 0.5) * 11.0;
+            z = (Math.random() - 0.5) * 10.0;
+            c = Math.random() < 0.6 ? C_ICE : C_ROSE;
+            s = 0.65 + Math.random() * 1.0;
+          }
+
+          pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+          col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2];
+          sz[i] = s; role[i] = rl;
+        }
+        return { pos, col, sz, role };
+      }
+
+      function buildTreeEffectsFormation() {
+        const pos = new Float32Array(P_COUNT * 3);
+        const col = new Float32Array(P_COUNT * 3);
+        const sz  = new Float32Array(P_COUNT);
+        const role = new Float32Array(P_COUNT);
+
+        const treeH = 7.1;
+        const treeBaseR = 3.15;
+        const yCenter = 0.55;
+
+        for (let i = 0; i < P_COUNT; i++) {
+          const ratio = i / P_COUNT;
+          let x, y, z, c, s, rl;
+
+          if (ratio < 0.44) {
+            // Sparkling fairy lights & frost diamonds nestled directly on the outer spruce boughs!
+            rl = 1;
+            const hNorm = Math.pow(Math.random(), 0.66);
+            const r = Math.pow(hNorm, 0.88) * treeBaseR * (0.92 + Math.random() * 0.14);
+            const ang = Math.random() * Math.PI * 2;
+            x = Math.cos(ang) * r;
+            z = Math.sin(ang) * r;
+            y = (0.5 - hNorm) * treeH + yCenter + (Math.random() - 0.5) * 0.18;
+
+            const cr = Math.random();
+            if (cr < 0.44) c = C_ICE;
+            else if (cr < 0.62) c = C_DIAMOND;
+            else if (cr < 0.80) c = C_ROSE;
+            else if (cr < 0.90) c = C_BLUSH;
+            else c = C_GOLD;
+            s = 0.85 + Math.random() * 1.35;
+          } else if (ratio < 0.72) {
+            // Blazing 3-strand spiral stardust streams racing continuously up the tree!
+            rl = 2;
+            const hNorm = Math.random();
+            const strand = i % 3;
+            const ang = hNorm * Math.PI * 2.0 * 5.2 + strand * 2.094395;
+            const r = Math.pow(hNorm, 0.88) * treeBaseR + 0.16;
+            x = Math.cos(ang) * r;
+            z = Math.sin(ang) * r;
+            y = (0.5 - hNorm) * treeH + yCenter;
+            c = strand === 0 ? C_ICE : (strand === 1 ? C_ROSE : C_DIAMOND);
+            s = 1.05 + Math.random() * 1.25;
+          } else if (ratio < 0.82) {
+            // Luminous jewel fairy-bulb highlights with 4-point cinema star flares
+            rl = 3;
+            const hNorm = 0.06 + Math.random() * 0.90;
+            const r = Math.pow(hNorm, 0.88) * treeBaseR * (0.98 + Math.random() * 0.08);
+            const ang = Math.random() * Math.PI * 2;
+            x = Math.cos(ang) * r;
+            z = Math.sin(ang) * r;
+            y = (0.5 - hNorm) * treeH + yCenter;
+            const cr = Math.random();
+            c = cr < 0.38 ? C_DIAMOND : (cr < 0.68 ? C_ICE : (cr < 0.88 ? C_ROSE : C_GOLD));
+            s = 1.55 + Math.random() * 1.35;
+          } else if (ratio < 0.90) {
+            // Expanding luminous frozen-lake ripple rings radiating beneath the tree
+            rl = 4;
+            const ringR = 1.0 + Math.random() * 4.5;
+            const ang = Math.random() * Math.PI * 2;
+            x = Math.cos(ang) * ringR;
+            z = Math.sin(ang) * ringR;
+            y = -3.58;
+            c = Math.random() < 0.72 ? C_ICE : C_BLUSH;
+            s = 0.85 + Math.random() * 1.05;
+          } else {
+            // Floating magical stardust & snowflakes surrounding the tree
+            rl = 5;
+            x = (Math.random() - 0.5) * 18.0;
+            y = (Math.random() - 0.5) * 13.0;
+            z = (Math.random() - 0.5) * 12.0;
+            c = Math.random() < 0.62 ? C_ICE : (Math.random() < 0.85 ? C_DIAMOND : C_ROSE);
+            s = 0.72 + Math.random() * 1.25;
+          }
+
+          pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+          col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2];
+          sz[i] = s; role[i] = rl;
+        }
+        return { pos, col, sz, role };
+      }
+
+      const ACT4_CAM_Z = 10.0;
+      const FOV_RAD = (46 * Math.PI) / 180;
+
+      function buildMessageFormation() {
+        const pos = new Float32Array(P_COUNT * 3);
+        const col = new Float32Array(P_COUNT * 3);
+        const sz  = new Float32Array(P_COUNT);
+        const role = new Float32Array(P_COUNT);
+
+        const safeW = Math.max(320, W);
+        const safeH = Math.max(320, H);
+        const aspect = safeW / safeH;
+        const visH = 2.0 * ACT4_CAM_Z * Math.tan(FOV_RAD * 0.5);
+        const visW = visH * aspect;
+
+        const maxTextW = safeW * (isMobile ? 0.90 : 0.78);
+        let fontSize = Math.min(Math.floor(maxTextW / (14 * 1.08)), isMobile ? 28 : 56);
+        fontSize = Math.max(fontSize, 20);
+
+        msgLine1El.style.fontSize = fontSize + 'px';
+        msgLine2El.style.fontSize = fontSize + 'px';
+
+        const off = document.createElement('canvas');
+        const offCtx = off.getContext('2d');
+        off.width = safeW;
+        off.height = safeH;
+
+        const lineGap = fontSize * 1.72;
+        const centerY = safeH * 0.48;
+
+        offCtx.clearRect(0, 0, safeW, safeH);
+        offCtx.fillStyle = '#ffffff';
+        offCtx.textAlign = 'center';
+        offCtx.textBaseline = 'middle';
+        offCtx.font = `400 ${fontSize}px "Ma Shan Zheng", "STXingkai", "Xingkai SC", "Kaiti SC", "STKaiti", "KaiTi", "ZCOOL XiaoWei", cursive, serif`;
+
+        function drawSpaced(text, cx, cy, tracking) {
+          const chars = Array.from(text);
+          const widths = chars.map(ch => offCtx.measureText(ch).width);
+          const total = widths.reduce((a, b) => a + b, 0) + tracking * (chars.length - 1);
+          let cur = cx - total * 0.5;
+          for (let i = 0; i < chars.length; i++) {
+            offCtx.fillText(chars[i], cur + widths[i] * 0.5, cy);
+            cur += widths[i] + tracking;
+          }
+        }
+
+        const tracking = fontSize * 0.08;
+        drawSpaced(MESSAGE_LINES[0], safeW * 0.5, centerY - lineGap * 0.5, tracking);
+        drawSpaced(MESSAGE_LINES[1], safeW * 0.5, centerY + lineGap * 0.5, tracking);
+
+        const img = offCtx.getImageData(0, 0, safeW, safeH).data;
+        const edgePts = [];
+        const yMin = Math.max(1, Math.floor(centerY - lineGap * 1.35));
+        const yMax = Math.min(safeH - 2, Math.ceil(centerY + lineGap * 1.35));
+
+        for (let y = yMin; y < yMax; y += 2) {
+          for (let x = 1; x < safeW - 1; x += 2) {
+            const idx = (y * safeW + x) * 4 + 3;
+            if (img[idx] > 110) {
+              const isEdge = (
+                img[((y - 1) * safeW + x) * 4 + 3] < 100 ||
+                img[((y + 1) * safeW + x) * 4 + 3] < 100 ||
+                img[(y * safeW + (x - 1)) * 4 + 3] < 100 ||
+                img[(y * safeW + (x + 1)) * 4 + 3] < 100
+              );
+              if (isEdge || Math.random() < 0.28) {
+                edgePts.push({ x, y, edge: isEdge });
+              }
+            }
+          }
+        }
+
+        const textQuota = Math.min(Math.floor(P_COUNT * 0.62), Math.max(edgePts.length, 1));
+        for (let i = 0; i < P_COUNT; i++) {
+          let x, y, z, c, s, rl;
+          if (i < textQuota && edgePts.length > 0) {
+            const pt = edgePts[Math.floor((i / textQuota) * edgePts.length)];
+            rl = 1;
+            const nx = pt.x / safeW;
+            const ny = pt.y / safeH;
+            x = (nx - 0.5) * visW;
+            y = -(ny - 0.5) * visH;
+            z = (Math.random() - 0.5) * 0.04;
+
+            if (nx < 0.45) c = Math.random() < 0.72 ? C_ICE : C_DIAMOND;
+            else if (nx < 0.65) c = Math.random() < 0.50 ? C_DIAMOND : (Math.random() < 0.75 ? C_ICE : C_BLUSH);
+            else c = Math.random() < 0.65 ? C_ROSE : C_BLUSH;
+
+            s = pt.edge ? (0.82 + Math.random() * 0.55) : (0.58 + Math.random() * 0.45);
+          } else {
+            rl = 2;
+            x = (Math.random() - 0.5) * visW * 1.15;
+            const topHalf = Math.random() < 0.5;
+            y = topHalf
+              ? (visH * 0.22 + Math.random() * visH * 0.34)
+              : (-visH * 0.22 - Math.random() * visH * 0.34);
+            z = (Math.random() - 0.5) * 7.0;
+            c = Math.random() < 0.66 ? C_ICE : (Math.random() < 0.88 ? C_ROSE : C_DIAMOND);
+            s = 0.65 + Math.random() * 1.15;
+          }
+          pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+          col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2];
+          sz[i] = s; role[i] = rl;
+        }
+        return { pos, col, sz, role };
+      }
+
+      const bufFromPos = gl.createBuffer();
+      const bufToPos   = gl.createBuffer();
+      const bufFromCol = gl.createBuffer();
+      const bufToCol   = gl.createBuffer();
+      const bufSeeds   = gl.createBuffer();
+
+      function uploadParticleBuffers() {
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufFromPos); gl.bufferData(gl.ARRAY_BUFFER, fromPos, gl.DYNAMIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufToPos);   gl.bufferData(gl.ARRAY_BUFFER, toPos, gl.DYNAMIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufFromCol); gl.bufferData(gl.ARRAY_BUFFER, fromCol, gl.DYNAMIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufToCol);   gl.bufferData(gl.ARRAY_BUFFER, toCol, gl.DYNAMIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufSeeds);   gl.bufferData(gl.ARRAY_BUFFER, seeds, gl.DYNAMIC_DRAW);
+      }
+
+      // ============================================================
+      // CINEMA-GRADE 3D GPU FIREWORKS (Continuous Glowing Streak Lines + Bright Heads + Epicenter Sky Flashes + Pixel-Perfect Click Ray Unprojection!)
+      // ============================================================
+      const MAX_FW_LINES = 18000;
+      const MAX_FW_PTS   = 4500;
+      const fwLinePos   = new Float32Array(MAX_FW_LINES * 3);
+      const fwLineCol   = new Float32Array(MAX_FW_LINES * 3);
+      const fwLineAlpha = new Float32Array(MAX_FW_LINES);
+
+      const fwPtPos   = new Float32Array(MAX_FW_PTS * 3);
+      const fwPtCol   = new Float32Array(MAX_FW_PTS * 3);
+      const fwPtAlpha = new Float32Array(MAX_FW_PTS);
+      const fwPtSize  = new Float32Array(MAX_FW_PTS);
+
+      const bufFwLinePos   = gl.createBuffer();
+      const bufFwLineCol   = gl.createBuffer();
+      const bufFwLineAlpha = gl.createBuffer();
+      const bufFwPtPos     = gl.createBuffer();
+      const bufFwPtCol     = gl.createBuffer();
+      const bufFwPtAlpha   = gl.createBuffer();
+      const bufFwPtSize    = gl.createBuffer();
+
+      const rockets = [];
+      const sparks = [];
+      const flashes = [];
+      let nextFwTime = 0;
+
+      function pickFwColors() {
+        const r = Math.random();
+        if (r < 0.38) return [C_ICE, C_ROSE];
+        if (r < 0.68) return [C_ROSE, C_BLUSH];
+        if (r < 0.86) return [C_ICE, C_GOLD];
+        return [C_SAPPHIRE, C_ROSE];
+      }
+
+      function burstFirework(x, y, z, colA, colB, style) {
+        // Luminous epicenter flash bloom!
+        flashes.push({ x, y, z, col: colA, life: 1.0, size: 7.5 });
+
+        const count = style === 'heart' ? 96 : (isMobile ? 96 : 150);
+        const speedBase = style === 'willow' ? 2.9 : 4.1;
+
+        for (let i = 0; i < count; i++) {
+          let vx, vy, vz, col = colA;
+          if (style === 'heart') {
+            const t = (i / count) * Math.PI * 2;
+            const hx = 16 * Math.pow(Math.sin(t), 3);
+            const hy = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+            const sc = 0.21 * (0.90 + Math.random() * 0.18);
+            vx = hx * sc; vy = hy * sc; vz = (Math.random() - 0.5) * 0.4;
+            col = i % 3 === 0 ? C_BLUSH : C_ROSE;
+          } else if (style === 'double') {
+            // Double-shell luxury chrysanthemum (vivid outer ice-blue shell + glowing inner rose-pink core!)
+            const u = Math.random() * 2 - 1;
+            const theta = Math.random() * Math.PI * 2;
+            const sq = Math.sqrt(1 - u * u);
+            const inner = i % 3 === 0;
+            const spd = speedBase * (inner ? (0.48 + Math.random() * 0.14) : (0.92 + Math.random() * 0.18));
+            vx = sq * Math.cos(theta) * spd;
+            vy = u * spd;
+            vz = sq * Math.sin(theta) * spd * 0.65;
+            col = inner ? colB : colA;
+          } else if (style === 'ring') {
+            const a = (i / count) * Math.PI * 2;
+            const ring = i % 2 === 0 ? 1.0 : 0.60;
+            vx = Math.cos(a) * speedBase * ring;
+            vy = Math.sin(a) * speedBase * ring;
+            vz = (Math.random() - 0.5) * 0.55;
+            col = i % 2 === 0 ? colA : colB;
+          } else {
+            // Cascading weeping willow
+            const u = Math.random() * 2 - 1;
+            const theta = Math.random() * Math.PI * 2;
+            const sq = Math.sqrt(1 - u * u);
+            const spd = speedBase * (0.38 + Math.pow(Math.random(), 0.52) * 0.82);
+            vx = sq * Math.cos(theta) * spd;
+            vy = u * spd;
+            vz = sq * Math.sin(theta) * spd * 0.65;
+            col = Math.random() < 0.62 ? colA : colB;
+          }
+
+          sparks.push({
+            x, y, z, vx, vy, vz,
+            col,
+            life: 1.0,
+            decay: style === 'willow' ? (0.32 + Math.random() * 0.14) : (0.42 + Math.random() * 0.22),
+            gravity: style === 'willow' ? 1.85 : 1.15,
+            drag: style === 'willow' ? 1.38 : 1.78,
+            size: 1.55 + Math.random() * 1.25,
+            strobe: Math.random() < 0.45,
+            trail: [[x, y, z]]
+          });
+        }
+      }
+
+      function launchFirework3D(destX, destY, destZ, fastClick = false) {
+        const [colA, colB] = pickFwColors();
+        const sr = Math.random();
+        const style = sr < 0.24 ? 'heart' : (sr < 0.56 ? 'double' : (sr < 0.80 ? 'willow' : 'ring'));
+        const tx = destX !== undefined ? destX : (Math.random() < 0.5 ? -(3.2 + Math.random() * 4.2) : (3.2 + Math.random() * 4.2));
+        const ty = destY !== undefined ? destY : (1.5 + Math.random() * 3.5);
+        const tz = destZ !== undefined ? destZ : (-2.8 - Math.random() * 3.0);
+
+        rockets.push({
+          sx: tx + (Math.random() - 0.5) * (fastClick ? 0.35 : 0.9),
+          sy: -3.6,
+          sz: tz,
+          tx, ty, tz,
+          x: tx, y: -3.6, z: tz,
+          elapsed: 0,
+          duration: fastClick ? 0.30 : (0.46 + Math.random() * 0.14),
+          colA, colB, style,
+          trail: [[tx, -3.6, tz]]
+        });
+      }
+
+      // Exact 3D Ray Unprojection so clicking ANY pixel launches a rocket that explodes on THAT EXACT PIXEL!
+      let lastViewMat = mat4LookAt([0, 0.72, 13.8], [0, 0.42, 0], [0, 1, 0]);
+
+      function screenToWorldAtZ(clientX, clientY, targetZ) {
+        const aspect = Math.max(0.3, W / Math.max(1, H));
+        const ndcX = (clientX / Math.max(1, W)) * 2.0 - 1.0;
+        const ndcY = 1.0 - (clientY / Math.max(1, H)) * 2.0;
+        const tanHalf = Math.tan(FOV_RAD * 0.5);
+
+        // View-space ray direction
+        const vx = ndcX * aspect * tanHalf;
+        const vy = ndcY * tanHalf;
+        const vz = -1.0;
+
+        // Orthonormal inverse of view matrix upper-left 3x3
+        const m = lastViewMat;
+        const dx = m[0] * vx + m[1] * vy + m[2] * vz;
+        const dy = m[4] * vx + m[5] * vy + m[6] * vz;
+        const dz = m[8] * vx + m[9] * vy + m[10] * vz;
+
+        const safeDz = Math.abs(dz) < 0.001 ? -0.001 : dz;
+        const tHit = (targetZ - camEye[2]) / safeDz;
+        return [
+          camEye[0] + dx * tHit,
+          camEye[1] + dy * tHit,
+          targetZ
+        ];
+      }
+
+      function spawnClickBeacon(clientX, clientY) {
+        const el = document.createElement('div');
+        el.className = 'click-beacon';
+        el.style.left = clientX + 'px';
+        el.style.top = clientY + 'px';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 500);
+      }
+
+      function stepFireworks(now, dt) {
+        if (currentAct === ACT_TREE && now > nextFwTime) {
+          const side = Math.random();
+          const tx = side < 0.46 ? -(3.2 + Math.random() * 4.4)
+                   : (side < 0.92 ? (3.2 + Math.random() * 4.4) : (Math.random() - 0.5) * 3.8);
+          const ty = 1.6 + Math.random() * 3.4;
+          const tz = -3.0 - Math.random() * 2.8;
+          launchFirework3D(tx, ty, tz, false);
+          nextFwTime = now + 680 + Math.random() * 640;
+        } else if (currentAct === ACT_MESSAGE && now > nextFwTime) {
+          const tx = Math.random() < 0.5 ? -(4.5 + Math.random() * 3.2) : (4.5 + Math.random() * 3.2);
+          const ty = 1.6 + Math.random() * 2.6;
+          launchFirework3D(tx, ty, -3.5, false);
+          nextFwTime = now + 2200 + Math.random() * 1800;
+        }
+
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          const r = rockets[i];
+          r.elapsed += dt;
+          const p = Math.min(1, r.elapsed / r.duration);
+          const ease = 1 - Math.pow(1 - p, 2.3);
+          r.x = r.sx + (r.tx - r.sx) * ease;
+          r.y = r.sy + (r.ty - r.sy) * ease;
+          r.z = r.sz;
+          r.trail.push([r.x, r.y, r.z]);
+          if (r.trail.length > 9) r.trail.shift();
+          if (p >= 1) {
+            burstFirework(r.tx, r.ty, r.tz, r.colA, r.colB, r.style);
+            rockets.splice(i, 1);
+          }
+        }
+
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const s = sparks[i];
+          const dragF = Math.exp(-s.drag * dt);
+          s.vx *= dragF;
+          s.vy = s.vy * dragF - s.gravity * dt;
+          s.vz *= dragF;
+          s.x += s.vx * dt;
+          s.y += s.vy * dt;
+          s.z += s.vz * dt;
+          s.trail.push([s.x, s.y, s.z]);
+          if (s.trail.length > 8) s.trail.shift();
+          s.life -= s.decay * dt;
+          if (s.life <= 0) sparks.splice(i, 1);
+        }
+
+        for (let i = flashes.length - 1; i >= 0; i--) {
+          flashes[i].life -= dt * 3.2;
+          if (flashes[i].life <= 0) flashes.splice(i, 1);
+        }
+
+        let lineV = 0;
+        let ptV = 0;
+        const dimAct4 = currentAct === ACT_MESSAGE ? 0.56 : 1.0;
+
+        // Pack epicenter sky flashes
+        for (let i = 0; i < flashes.length && ptV < MAX_FW_PTS; i++) {
+          const fl = flashes[i];
+          fwPtPos[ptV * 3] = fl.x; fwPtPos[ptV * 3 + 1] = fl.y; fwPtPos[ptV * 3 + 2] = fl.z;
+          fwPtCol[ptV * 3] = fl.col[0]; fwPtCol[ptV * 3 + 1] = fl.col[1]; fwPtCol[ptV * 3 + 2] = fl.col[2];
+          fwPtAlpha[ptV] = fl.life * fl.life * 0.85 * dimAct4;
+          fwPtSize[ptV] = fl.size * (1.2 - fl.life * 0.4);
+          ptV++;
+        }
+
+        // Pack rockets (glowing continuous ascent trail + blazing head)
+        for (let i = 0; i < rockets.length; i++) {
+          const r = rockets[i];
+          for (let j = 1; j < r.trail.length && lineV + 2 <= MAX_FW_LINES; j++) {
+            const p0 = r.trail[j - 1], p1 = r.trail[j];
+            const ratio = j / r.trail.length;
+            fwLinePos[lineV * 3] = p0[0]; fwLinePos[lineV * 3 + 1] = p0[1]; fwLinePos[lineV * 3 + 2] = p0[2];
+            fwLineCol[lineV * 3] = r.colA[0]; fwLineCol[lineV * 3 + 1] = r.colA[1]; fwLineCol[lineV * 3 + 2] = r.colA[2];
+            fwLineAlpha[lineV] = (ratio * 0.65) * dimAct4;
+            lineV++;
+
+            fwLinePos[lineV * 3] = p1[0]; fwLinePos[lineV * 3 + 1] = p1[1]; fwLinePos[lineV * 3 + 2] = p1[2];
+            fwLineCol[lineV * 3] = 1.0; fwLineCol[lineV * 3 + 1] = 1.0; fwLineCol[lineV * 3 + 2] = 1.0;
+            fwLineAlpha[lineV] = ratio * 0.95 * dimAct4;
+            lineV++;
+          }
+          if (ptV < MAX_FW_PTS) {
+            fwPtPos[ptV * 3] = r.x; fwPtPos[ptV * 3 + 1] = r.y; fwPtPos[ptV * 3 + 2] = r.z;
+            fwPtCol[ptV * 3] = r.colA[0]; fwPtCol[ptV * 3 + 1] = r.colA[1]; fwPtCol[ptV * 3 + 2] = r.colA[2];
+            fwPtAlpha[ptV] = 1.0 * dimAct4;
+            fwPtSize[ptV] = 2.4;
+            ptV++;
+          }
+        }
+
+        // Pack sparks (smooth continuous curved streaks + sparkling diamond heads)
+        for (let i = 0; i < sparks.length; i++) {
+          const s = sparks[i];
+          const strobeFlicker = (s.strobe && s.life < 0.42)
+            ? (Math.sin(now * 0.045 + i * 3.1) > 0.15 ? 1.15 : 0.25)
+            : (0.78 + 0.22 * Math.sin(now * 0.02 + i));
+          const headA = Math.pow(s.life, 1.05) * strobeFlicker * dimAct4;
+
+          for (let j = 1; j < s.trail.length && lineV + 2 <= MAX_FW_LINES; j++) {
+            const p0 = s.trail[j - 1], p1 = s.trail[j];
+            const r0 = (j - 1) / s.trail.length;
+            const r1 = j / s.trail.length;
+
+            fwLinePos[lineV * 3] = p0[0]; fwLinePos[lineV * 3 + 1] = p0[1]; fwLinePos[lineV * 3 + 2] = p0[2];
+            fwLineCol[lineV * 3] = s.col[0]; fwLineCol[lineV * 3 + 1] = s.col[1]; fwLineCol[lineV * 3 + 2] = s.col[2];
+            fwLineAlpha[lineV] = headA * r0 * 0.82;
+            lineV++;
+
+            fwLinePos[lineV * 3] = p1[0]; fwLinePos[lineV * 3 + 1] = p1[1]; fwLinePos[lineV * 3 + 2] = p1[2];
+            fwLineCol[lineV * 3] = Math.min(1, s.col[0] + 0.35 * r1);
+            fwLineCol[lineV * 3 + 1] = Math.min(1, s.col[1] + 0.35 * r1);
+            fwLineCol[lineV * 3 + 2] = Math.min(1, s.col[2] + 0.35 * r1);
+            fwLineAlpha[lineV] = headA * r1 * 0.96;
+            lineV++;
+          }
+
+          if (ptV < MAX_FW_PTS) {
+            fwPtPos[ptV * 3] = s.x; fwPtPos[ptV * 3 + 1] = s.y; fwPtPos[ptV * 3 + 2] = s.z;
+            fwPtCol[ptV * 3] = s.col[0]; fwPtCol[ptV * 3 + 1] = s.col[1]; fwPtCol[ptV * 3 + 2] = s.col[2];
+            fwPtAlpha[ptV] = Math.min(1.0, headA * 1.15);
+            fwPtSize[ptV] = s.size * (0.65 + s.life * 0.65);
+            ptV++;
+          }
+        }
+
+        if (lineV > 0) {
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwLinePos); gl.bufferData(gl.ARRAY_BUFFER, fwLinePos.subarray(0, lineV * 3), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwLineCol); gl.bufferData(gl.ARRAY_BUFFER, fwLineCol.subarray(0, lineV * 3), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwLineAlpha); gl.bufferData(gl.ARRAY_BUFFER, fwLineAlpha.subarray(0, lineV), gl.DYNAMIC_DRAW);
+        }
+        if (ptV > 0) {
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwPtPos); gl.bufferData(gl.ARRAY_BUFFER, fwPtPos.subarray(0, ptV * 3), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwPtCol); gl.bufferData(gl.ARRAY_BUFFER, fwPtCol.subarray(0, ptV * 3), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwPtAlpha); gl.bufferData(gl.ARRAY_BUFFER, fwPtAlpha.subarray(0, ptV), gl.DYNAMIC_DRAW);
+          gl.bindBuffer(gl.ARRAY_BUFFER, bufFwPtSize); gl.bufferData(gl.ARRAY_BUFFER, fwPtSize.subarray(0, ptV), gl.DYNAMIC_DRAW);
+        }
+
+        return { lineV, ptV };
+      }
+
+      // ---- State & Camera Choreography ----
+      let currentAct = ACT_INTRO;
+      let actStartTime = performance.now();
+      let lastFrameTime = performance.now();
+      let morphProgress = 1.0;
+      let autoAdvance = true;
+      let daysAnimated = false;
+      let heartCounterStart = 0;
+
+      const camEye = [0, 0.4, 11.5];
+      const camTarget = [0, 0.0, 0];
+      const pointer = { nx: 0, ny: 0, wx: 0, wy: 0, active: false };
+
+      function applyFormation(act, immediate = false) {
+        const targetF = formations[act];
+        if (!targetF) return;
+
+        if (immediate) {
+          fromPos.set(targetF.pos);
+          toPos.set(targetF.pos);
+          fromCol.set(targetF.col);
+          toCol.set(targetF.col);
+          morphProgress = 1.0;
+        } else {
+          const e = morphProgress * morphProgress * (3 - 2 * morphProgress);
+          for (let i = 0; i < P_COUNT * 3; i++) {
+            fromPos[i] = fromPos[i] + (toPos[i] - fromPos[i]) * e;
+            fromCol[i] = fromCol[i] + (toCol[i] - fromCol[i]) * e;
+          }
+          toPos.set(targetF.pos);
+          toCol.set(targetF.col);
+          morphProgress = 0.0;
+        }
+
+        for (let i = 0; i < P_COUNT; i++) {
+          seeds[i * 4 + 1] = targetF.sz[i];
+          seeds[i * 4 + 2] = targetF.role[i];
+          if (act === ACT_MESSAGE && targetF.role[i] < 1.5) {
+            const xNorm = Math.max(0, Math.min(1, (targetF.pos[i * 3] + 6.0) / 12.0));
+            seeds[i * 4 + 3] = xNorm;
+          } else {
+            seeds[i * 4 + 3] = Math.random();
+          }
+        }
+        uploadParticleBuffers();
+      }
+
+      function goToAct(nextAct, triggeredByUser = false) {
+        if (nextAct < 0 || nextAct > ACT_MESSAGE) return;
+        currentAct = nextAct;
+        actStartTime = performance.now();
+
+        overlays.forEach((el, idx) => el.classList.toggle('active', idx === currentAct));
+        dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentAct));
+
+        if (currentAct === ACT_MESSAGE) {
+          msgLine1El.style.animation = 'none';
+          msgLine2El.style.animation = 'none';
+          void msgLine1El.offsetWidth;
+          msgLine1El.style.animation = '';
+          msgLine2El.style.animation = '';
+        }
+
+        applyFormation(currentAct, false);
+
+        if (currentAct === ACT_HEART) {
+          daysAnimated = false;
+          heartCounterStart = performance.now() + 240;
+          daysCounterEl.textContent = '0';
+        }
+
+        if (currentAct === ACT_TREE) {
+          nextFwTime = performance.now() + 620;
+          launchFirework3D(-4.8, 3.0, -3.0, false);
+          setTimeout(() => { if (currentAct === ACT_TREE) launchFirework3D(4.9, 3.3, -3.2, false); }, 200);
+          setTimeout(() => { if (currentAct === ACT_TREE) launchFirework3D(-3.5, 4.2, -3.6, false); }, 560);
+          setTimeout(() => { if (currentAct === ACT_TREE) launchFirework3D(3.8, 2.3, -2.8, false); }, 920);
+        }
+
+        if (triggeredByUser && currentAct === ACT_INTRO) {
+          introHintEl.style.opacity = '0.80';
+        }
+      }
+
+      function bindAttr(prog, name, buf, size, stride = 0, offset = 0) {
+        const loc = gl.getAttribLocation(prog, name);
+        if (loc < 0) return -1;
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.enableVertexAttribArray(loc);
+        gl.vertexAttribPointer(loc, size, gl.FLOAT, false, stride, offset);
+        return loc;
+      }
+
+      function drawScenePass(proj, view, t, actElapsed, beatScale, rotY, mirror, fwCounts, treeOpacity) {
+        const floorY = -3.62;
+        const focusDist = currentAct === ACT_TREE ? 13.6 : (currentAct === ACT_MESSAGE ? ACT4_CAM_Z : 10.6);
+
+        // 1. Background 3D Fireworks (Lines + Glowing Diamond Heads, always cleanly behind the real spruce tree!)
+        if (fwCounts.lineV > 0 || fwCounts.ptV > 0) {
+          gl.disable(gl.DEPTH_TEST);
+          gl.depthMask(false);
+          gl.enable(gl.BLEND);
+          gl.blendFunc(gl.ONE, gl.ONE);
+
+          if (fwCounts.lineV > 0) {
+            gl.useProgram(fwLineProg);
+            gl.uniformMatrix4fv(gl.getUniformLocation(fwLineProg, 'uProj'), false, proj);
+            gl.uniformMatrix4fv(gl.getUniformLocation(fwLineProg, 'uView'), false, view);
+            gl.uniform1f(gl.getUniformLocation(fwLineProg, 'uMirror'), mirror);
+            gl.uniform1f(gl.getUniformLocation(fwLineProg, 'uFloorY'), floorY);
+            bindAttr(fwLineProg, 'aPos', bufFwLinePos, 3);
+            bindAttr(fwLineProg, 'aCol', bufFwLineCol, 3);
+            bindAttr(fwLineProg, 'aAlpha', bufFwLineAlpha, 1);
+            gl.drawArrays(gl.LINES, 0, fwCounts.lineV);
+          }
+
+          if (fwCounts.ptV > 0) {
+            gl.useProgram(fwPtProg);
+            gl.uniformMatrix4fv(gl.getUniformLocation(fwPtProg, 'uProj'), false, proj);
+            gl.uniformMatrix4fv(gl.getUniformLocation(fwPtProg, 'uView'), false, view);
+            gl.uniform1f(gl.getUniformLocation(fwPtProg, 'uMirror'), mirror);
+            gl.uniform1f(gl.getUniformLocation(fwPtProg, 'uFloorY'), floorY);
+            gl.uniform1f(gl.getUniformLocation(fwPtProg, 'uDpr'), DPR);
+            gl.uniform1f(gl.getUniformLocation(fwPtProg, 'uMaxPt'), MAX_PT);
+            bindAttr(fwPtProg, 'aPos', bufFwPtPos, 3);
+            bindAttr(fwPtProg, 'aCol', bufFwPtCol, 3);
+            bindAttr(fwPtProg, 'aAlpha', bufFwPtAlpha, 1);
+            bindAttr(fwPtProg, 'aSize', bufFwPtSize, 1);
+            gl.drawArrays(gl.POINTS, 0, fwCounts.ptV);
+          }
+        }
+
+        // 2. Realistic 3D Organic Spruce Tree (Cedar Trunk + Glossy Glass Baubles + 10,500 Feathery Pine-Needle Clusters!)
+        if (treeOpacity > 0.01) {
+          gl.clear(gl.DEPTH_BUFFER_BIT);
+          gl.enable(gl.DEPTH_TEST);
+          gl.depthFunc(gl.LEQUAL);
+          gl.depthMask(true);
+          gl.enable(gl.BLEND);
+          gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+          // 2A. Cedar Trunk & Glossy Glass Ornaments
+          gl.useProgram(solidProg);
+          gl.uniformMatrix4fv(gl.getUniformLocation(solidProg, 'uProj'), false, proj);
+          gl.uniformMatrix4fv(gl.getUniformLocation(solidProg, 'uView'), false, view);
+          gl.uniform1f(gl.getUniformLocation(solidProg, 'uRotY'), rotY);
+          gl.uniform1f(gl.getUniformLocation(solidProg, 'uMirror'), mirror);
+          gl.uniform1f(gl.getUniformLocation(solidProg, 'uFloorY'), floorY);
+          gl.uniform1f(gl.getUniformLocation(solidProg, 'uTime'), t);
+          gl.uniform1f(gl.getUniformLocation(solidProg, 'uOpacity'), treeOpacity);
+          gl.uniform3f(gl.getUniformLocation(solidProg, 'uCamPos'), camEye[0], camEye[1], camEye[2]);
+          const sStride = 10 * 4;
+          bindAttr(solidProg, 'aPos', solidBuf, 3, sStride, 0);
+          bindAttr(solidProg, 'aNorm', solidBuf, 3, sStride, 3 * 4);
+          bindAttr(solidProg, 'aCol', solidBuf, 3, sStride, 6 * 4);
+          bindAttr(solidProg, 'aMat', solidBuf, 1, sStride, 9 * 4);
+          gl.drawArrays(gl.TRIANGLES, 0, solidCount);
+
+          // 2B. Lush Feathery Evergreen Spruce Pine-Needle Clusters
+          gl.useProgram(pineProg);
+          gl.uniformMatrix4fv(gl.getUniformLocation(pineProg, 'uProj'), false, proj);
+          gl.uniformMatrix4fv(gl.getUniformLocation(pineProg, 'uView'), false, view);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uRotY'), rotY);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uMirror'), mirror);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uFloorY'), floorY);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uTime'), t);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uDpr'), DPR);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uMaxPt'), MAX_PT);
+          gl.uniform1f(gl.getUniformLocation(pineProg, 'uOpacity'), treeOpacity);
+          gl.uniform3f(gl.getUniformLocation(pineProg, 'uCamPos'), camEye[0], camEye[1], camEye[2]);
+          bindAttr(pineProg, 'aPos', bufPinePos, 3);
+          bindAttr(pineProg, 'aNorm', bufPineNorm, 3);
+          bindAttr(pineProg, 'aMeta', bufPineMeta, 4);
+          gl.drawArrays(gl.POINTS, 0, pineCount);
+        }
+
+        // 3. Additive Optical Glow Pass (Wrapping Aurora Ribbons + Fairy Lights + Crystalline Stardust)
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE);
+        gl.depthMask(false);
+        if (treeOpacity > 0.35) {
+          gl.enable(gl.DEPTH_TEST);
+        } else {
+          gl.disable(gl.DEPTH_TEST);
+        }
+
+        if (treeOpacity > 0.01) {
+          gl.useProgram(ribbonProg);
+          gl.uniformMatrix4fv(gl.getUniformLocation(ribbonProg, 'uProj'), false, proj);
+          gl.uniformMatrix4fv(gl.getUniformLocation(ribbonProg, 'uView'), false, view);
+          gl.uniform1f(gl.getUniformLocation(ribbonProg, 'uRotY'), rotY);
+          gl.uniform1f(gl.getUniformLocation(ribbonProg, 'uMirror'), mirror);
+          gl.uniform1f(gl.getUniformLocation(ribbonProg, 'uFloorY'), floorY);
+          gl.uniform1f(gl.getUniformLocation(ribbonProg, 'uTime'), t);
+          gl.uniform1f(gl.getUniformLocation(ribbonProg, 'uOpacity'), treeOpacity);
+          const rStride = 6 * 4;
+          bindAttr(ribbonProg, 'aPos', ribbonBuf, 3, rStride, 0);
+          bindAttr(ribbonProg, 'aUv', ribbonBuf, 2, rStride, 3 * 4);
+          bindAttr(ribbonProg, 'aRibbonId', ribbonBuf, 1, rStride, 5 * 4);
+          for (let r = 0; r < RIBBON_COUNT; r++) {
+            gl.drawArrays(gl.TRIANGLE_STRIP, ribbonStarts[r], ribbonCounts[r]);
+          }
+        }
+
+        gl.useProgram(particleProg);
+        gl.uniformMatrix4fv(gl.getUniformLocation(particleProg, 'uProj'), false, proj);
+        gl.uniformMatrix4fv(gl.getUniformLocation(particleProg, 'uView'), false, view);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uTime'), t);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uMorph'), morphProgress);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uAct'), currentAct);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uActElapsed'), actElapsed);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uBeat'), beatScale);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uRotY'), rotY);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uMirror'), mirror);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uFloorY'), floorY);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uFocusDist'), focusDist);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uDpr'), DPR);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uMaxPt'), MAX_PT);
+        gl.uniform2f(gl.getUniformLocation(particleProg, 'uPointerWorld'), pointer.wx, pointer.wy);
+        gl.uniform1f(gl.getUniformLocation(particleProg, 'uPointerOn'), pointer.active ? 1.0 : 0.0);
+
+        bindAttr(particleProg, 'aFromPos', bufFromPos, 3);
+        bindAttr(particleProg, 'aToPos', bufToPos, 3);
+        bindAttr(particleProg, 'aFromCol', bufFromCol, 3);
+        bindAttr(particleProg, 'aToCol', bufToCol, 3);
+        bindAttr(particleProg, 'aSeed', bufSeeds, 4);
+        gl.drawArrays(gl.POINTS, 0, P_COUNT);
+
+        // 4. Radiant Diamond Star Topper
+        if (treeOpacity > 0.01) {
+          gl.disable(gl.DEPTH_TEST);
+          gl.useProgram(starProg);
+          gl.uniformMatrix4fv(gl.getUniformLocation(starProg, 'uProj'), false, proj);
+          gl.uniformMatrix4fv(gl.getUniformLocation(starProg, 'uView'), false, view);
+          gl.uniform3f(gl.getUniformLocation(starProg, 'uWorldPos'), 0.0, 4.25, 0.0);
+          gl.uniform1f(gl.getUniformLocation(starProg, 'uScale'), 1.42);
+          gl.uniform1f(gl.getUniformLocation(starProg, 'uMirror'), mirror);
+          gl.uniform1f(gl.getUniformLocation(starProg, 'uFloorY'), floorY);
+          gl.uniform1f(gl.getUniformLocation(starProg, 'uTime'), t);
+          gl.uniform1f(gl.getUniformLocation(starProg, 'uOpacity'), treeOpacity);
+          bindAttr(starProg, 'aCorner', starBuf, 2);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        }
+
+        gl.depthMask(true);
+      }
+
+      // ---- Main 60FPS Render Loop ----
+      let treeVisualOpacity = 0.0;
+      let lakeVisibility = 0.25;
+
+      function render(now) {
+        requestAnimationFrame(render);
+
+        const dt = Math.min(0.05, Math.max(0.001, (now - lastFrameTime) / 1000));
+        lastFrameTime = now;
+        const t = now * 0.001;
+        const actElapsed = (now - actStartTime) / 1000;
+
+        if (autoAdvance && currentAct < ACT_MESSAGE) {
+          if (now - actStartTime > ACT_DURATIONS[currentAct]) {
+            goToAct(currentAct + 1);
+          }
+        }
+
+        if (morphProgress < 1.0) {
+          morphProgress = Math.min(1.0, morphProgress + dt * 0.78);
+        }
+
+        if (currentAct === ACT_HEART && !daysAnimated && now >= heartCounterStart) {
+          const prog = Math.min(1, (now - heartCounterStart) / 1450);
+          const eased = 1 - Math.pow(1 - prog, 4);
+          daysCounterEl.textContent = String(Math.round(eased * 181));
+          if (prog >= 1) {
+            daysCounterEl.textContent = '181';
+            daysAnimated = true;
+          }
+        }
+
+        let desiredEye, desiredTarget, desiredLake;
+        if (currentAct === ACT_INTRO) {
+          desiredEye = [Math.sin(t * 0.25) * 0.7 + pointer.nx * 0.7, 0.35 - pointer.ny * 0.35, 11.4 - Math.min(actElapsed * 0.22, 1.0)];
+          desiredTarget = [0, 0.1, 0];
+          desiredLake = 0.28;
+        } else if (currentAct === ACT_HEART) {
+          desiredEye = [Math.sin(t * 0.35) * 0.9 + pointer.nx * 0.9, 0.45 - pointer.ny * 0.4, isMobile ? 13.0 : 10.6];
+          desiredTarget = [0, 0.15, 0];
+          desiredLake = 0.72;
+        } else if (currentAct === ACT_TREE) {
+          const orbit = Math.sin(t * 0.22) * 1.35 + pointer.nx * 1.25;
+          desiredEye = [orbit, 0.72 - pointer.ny * 0.38, isMobile ? 16.6 : 13.7];
+          desiredTarget = [0, 0.38, 0];
+          desiredLake = 1.0;
+        } else {
+          desiredEye = [pointer.nx * 0.25, -pointer.ny * 0.15, ACT4_CAM_Z];
+          desiredTarget = [0, 0, 0];
+          desiredLake = 0.52;
+        }
+
+        const camLerp = 1 - Math.exp(-2.8 * dt);
+        for (let k = 0; k < 3; k++) {
+          camEye[k] += (desiredEye[k] - camEye[k]) * camLerp;
+          camTarget[k] += (desiredTarget[k] - camTarget[k]) * camLerp;
+        }
+        lakeVisibility += (desiredLake - lakeVisibility) * (1 - Math.exp(-2.2 * dt));
+
+        const targetTreeOp = currentAct === ACT_TREE ? Math.min(1, Math.max(0, (actElapsed - 0.28) / 0.85)) : 0.0;
+        treeVisualOpacity += (targetTreeOp - treeVisualOpacity) * (1 - Math.exp(-4.5 * dt));
+
+        let beatScale = 1.0;
+        let rotY = 0.0;
+        if (currentAct === ACT_HEART) {
+          const cycle = (t * 0.86) % 1;
+          const lub = Math.exp(-Math.pow((cycle - 0.14) / 0.055, 2)) * 0.075;
+          const dub = Math.exp(-Math.pow((cycle - 0.30) / 0.068, 2)) * 0.045;
+          beatScale = 1.0 + lub + dub;
+          rotY = Math.sin(t * 0.56) * 0.36;
+        } else if (currentAct === ACT_TREE) {
+          rotY = t * 0.38;
+        }
+
+        const fwCounts = stepFireworks(now, dt);
+
+        const aspect = Math.max(0.3, W / Math.max(1, H));
+        const proj = mat4Perspective(FOV_RAD, aspect, 0.1, 80.0);
+        const view = mat4LookAt(camEye, camTarget, [0, 1, 0]);
+        lastViewMat = view;
+
+        const floorClipY = (proj[5] * (view[5] * (-3.62) + view[13])) /
+                           Math.max(0.1, -(view[6] * (-3.62) + view[14]));
+        const horizonUvY = Math.max(0.06, Math.min(0.45, floorClipY * 0.5 + 0.5));
+
+        gl.viewport(0, 0, canvas.width, canvas.height);
+
+        // PASS 0: Deep Midnight Sky + Aurora + Frozen Mirror Ice Lake
+        gl.disable(gl.DEPTH_TEST);
+        gl.depthMask(false);
+        gl.disable(gl.BLEND);
+        gl.useProgram(skyProg);
+        gl.uniform1f(gl.getUniformLocation(skyProg, 'uTime'), t);
+        gl.uniform1f(gl.getUniformLocation(skyProg, 'uHorizonY'), horizonUvY);
+        gl.uniform1f(gl.getUniformLocation(skyProg, 'uLakeAlpha'), lakeVisibility);
+        gl.uniform2f(gl.getUniformLocation(skyProg, 'uResolution'), W, H);
+        bindAttr(skyProg, 'aPos', skyBuf, 2);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        // PASS 1: Frozen Lake Real-Time Mirror Reflection Pass
+        if (lakeVisibility > 0.08) {
+          drawScenePass(proj, view, t, actElapsed, beatScale, rotY, 1.0, fwCounts, treeVisualOpacity);
+        }
+
+        // PASS 2: Primary Real-Time 3D Scene Pass
+        drawScenePass(proj, view, t, actElapsed, beatScale, rotY, 0.0, fwCounts, treeVisualOpacity);
+      }
+
+      function handleResize() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        if (W <= 0 || H <= 0) return;
+
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        isMobile = W < 680;
+        canvas.width = Math.floor(W * DPR);
+        canvas.height = Math.floor(H * DPR);
+
+        formations[ACT_MESSAGE] = buildMessageFormation();
+        if (currentAct === ACT_MESSAGE) {
+          applyFormation(ACT_MESSAGE, true);
+        }
+      }
+
+      function updatePointer(cx, cy) {
+        pointer.nx = (cx / Math.max(1, W) - 0.5) * 2;
+        pointer.ny = (cy / Math.max(1, H) - 0.5) * 2;
+        const visH = 2.0 * ACT4_CAM_Z * Math.tan(FOV_RAD * 0.5);
+        const visW = visH * (W / Math.max(1, H));
+        pointer.wx = (cx / Math.max(1, W) - 0.5) * visW;
+        pointer.wy = -(cy / Math.max(1, H) - 0.5) * visH;
+        pointer.active = true;
+      }
+
+      window.addEventListener('mousemove', e => updatePointer(e.clientX, e.clientY));
+      window.addEventListener('mouseleave', () => { pointer.active = false; });
+      window.addEventListener('touchmove', e => {
+        if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      window.addEventListener('touchend', () => { pointer.active = false; });
+
+      canvas.addEventListener('click', e => {
+        if (!MusicBox.isPlaying() && currentAct === ACT_INTRO) {
+          MusicBox.start();
+          introHintEl.textContent = '旋律已开启 · 星光正在流转';
+          return;
+        }
+        if (currentAct === ACT_TREE || currentAct === ACT_MESSAGE) {
+          // Pixel-perfect 3D ray-unprojected firework: instant visual beacon + blazing rocket exploding at exact click!
+          spawnClickBeacon(e.clientX, e.clientY);
+          const [wx, wy, wz] = screenToWorldAtZ(e.clientX, e.clientY, -2.8);
+          launchFirework3D(wx, Math.max(-2.6, wy), wz, true);
+        } else {
+          goToAct(currentAct + 1, true);
+        }
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', e => {
+          e.stopPropagation();
+          goToAct(Number(dot.dataset.act), true);
+        });
+      });
+
+      btnNext.addEventListener('click', e => {
+        e.stopPropagation();
+        goToAct((currentAct + 1) % 4, true);
+      });
+
+      btnReplay.addEventListener('click', e => {
+        e.stopPropagation();
+        autoAdvance = true;
+        goToAct(ACT_INTRO, true);
+      });
+
+      btnAudio.addEventListener('click', e => {
+        e.stopPropagation();
+        MusicBox.toggle();
+      });
+
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          goToAct((currentAct + 1) % 4, true);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          goToAct((currentAct + 3) % 4, true);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        clearTimeout(window.__glResize);
+        window.__glResize = setTimeout(handleResize, 160);
+      });
+
+      canvas.width = Math.floor(W * DPR);
+      canvas.height = Math.floor(H * DPR);
+      formations[ACT_INTRO]   = buildIntroFormation();
+      formations[ACT_HEART]   = buildHeartFormation();
+      formations[ACT_TREE]    = buildTreeEffectsFormation();
+      formations[ACT_MESSAGE] = buildMessageFormation();
+
+      applyFormation(ACT_INTRO, true);
+      requestAnimationFrame(render);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          formations[ACT_MESSAGE] = buildMessageFormation();
+          if (currentAct === ACT_MESSAGE) {
+            applyFormation(ACT_MESSAGE, true);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
